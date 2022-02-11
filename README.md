@@ -1,40 +1,72 @@
-# Infantry Online Client Setup Files
+# Infantry Online Client Setup/Installer Files
+-
+**Download the latest built, ready to run, clients at: [http://freeinfantry.com](http://freeinfantry.com)**
 
-Source Setup/Installer files for the Infantry Online game. (http://freeinfantry.com)
+Setup/Installer source files for the Infantry Online game:
 
-## WINDOWS
+## Windows
 
-### [Windows] Prerequisites
- - Visual Studio 2019 Community Edition
- - TODO: more...
+> ### Prerequisites
+>
+> - Windows 7 SP1 or later
 
-### [Windows] Steps
+<details>
+  <summary>(TODO) Building the Installer</summary>
 
-#### [Windows] Building the Installer
- - TODO
+> **Download/Install First**
+> 
+> - Visual Studio 2019 Community Edition ([https://visualstudio.microsoft.com/vs/older-downloads/](https://visualstudio.microsoft.com/vs/older-downloads/))
+
+- (TODO) More things...
+</details>
 
 ## macOS
 
-### [macOS] Prerequisites
+> ### Prerequisites
+>
+> - macOS 10.13 (High Sierra) or later
 
- - Minimum macOS 10.13 High Sierra
- - WineSkin Wrapper (https://github.com/Gcenx/WineskinServer)
- - Mac "Packages" app (http://s.sudre.free.fr/Software/Packages/about.html)
- - `brew install create-dmg` (https://github.com/create-dmg/create-dmg)
- - cnc-ddraw (https://github.com/CnCNet/cnc-ddraw)
+<details>
+  <summary>(TODO) How to wrap the Windows .exe into a Mac .app with WineSkin</summary>
 
-### [macOS] Steps
+> **Download/Install First**
+> 
+> - WineSkin Wrapper ([https://github.com/Gcenx/WineskinServer](https://github.com/Gcenx/WineskinServer))
+> - cnc-ddraw ([https://github.com/CnCNet/cnc-ddraw](https://github.com/CnCNet/cnc-ddraw))
 
-#### [macOS] Wrapping the windows Infantry Online Client into a Mac .app with WineSkin
- 1. TODO
+- TODO
+</details>
 
-#### [macOS] Building the Installer
+<details>
+  <summary>Building the Installer</summary>
+
+> **Download/Install First**
+> 
+> - Mac "Packages" app ([http://s.sudre.free.fr/Software/Packages/about.html](http://s.sudre.free.fr/Software/Packages/about.html))
+> - `brew install create-dmg` ([https://github.com/create-dmg/create-dmg](https://github.com/create-dmg/create-dmg))
+
  1. Place the built WineSkin wrapped client app here: "./Mac/_build/app/Infantry Online.app"
  2. Run the "./Mac/buildPackageDMG.sh" in the terminal to build a .pkg installer file and a distributable dmg file.
+</details>
 
-## Thanks
+<details>
+  <summary>Screenshots</summary>
 
- - Gcenx for his updates on WineSkin (originally created by doh123)
- - Realm AKA Col. Kitty Hawk for rnd/testing
+![DMG Volume](Mac/_screenshots/DMGVolume.png)
+![DMG Installer Window](Mac/_screenshots/DMGInstallerWindow.png)
+</details>
+
+## Thanks to all Contributors
+
+#### FreeInfantry
+ - Realm (AKA Col. Kitty Hawk) for RnD/testing
+ - Jovan for helping with the repo & website
  - The whole FreeInfantry team.
- - Many more people
+
+#### CNC-DDraw
+ - FunkyFr3sh for his work on cnc-ddraw to support this game
+
+#### Wineskin
+ - Gcenx for his updates on WineSkin (originally created by doh123)
+
+#### Many more people
