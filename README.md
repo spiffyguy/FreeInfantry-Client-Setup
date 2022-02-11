@@ -1,5 +1,5 @@
 # Infantry Online Client Setup/Installer Files
--
+
 **Download the latest built, ready to run, clients at: [http://freeinfantry.com](http://freeinfantry.com)**
 
 Setup/Installer source files for the Infantry Online game:
