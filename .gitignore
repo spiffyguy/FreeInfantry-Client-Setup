@@ -1,0 +1,5 @@
+**/.DS_Store
+/Mac/_builds/app/**
+/Mac/_builds/dmg/**
+/Mac/_builds/pkg/**
+!**/.gitkeep
