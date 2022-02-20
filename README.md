@@ -78,13 +78,30 @@ Setup/Installer source files for the Infantry Online game:
 **Any Distro that WINE supports**
 
 <details>
-  <summary>(TODO) Lutris Script</summary>
+  <summary>PlayOnLinux Script (with Screenshots)</summary>
+  
+>
+> **Download/Install First**
+> 
+> - PlayOnLinux ([https://www.playonlinux.com](https://www.playonlinux.com)), usually available with whatever linux default software distribution app you have. (ie: "Ubuntu Software" for Ubuntu, "Pamac Add/Remove Software" for Manjaro).
+> 
 
-- TODO
+1. Download the "play-on-linux-infantry-online.sh" Script from this repo
+
+2. Open PlayOnLinux
+
+3. Open the Tools menu and choose "Run a local script"
+
+ ![PlayOnLinux Tools Run Local Script](Linux/_screenshots/POL_Tools-Menu_Run-Local-Script.png)
+ 
+4. Navigate to the downloaded "play-on-linux-infantry-online.sh" script.
+
+5. Follow the prompts and Infantry will be installed and ready to play!
 </details>
 
+<!-- 
 <details>
-  <summary>(TODO) PlayOnLinux Script</summary>
+  <summary>(TODO) Lutris Script</summary>
 
 - TODO
 </details>
@@ -94,6 +111,7 @@ Setup/Installer source files for the Infantry Online game:
 
 - TODO
 </details>
+-->
 
 <details>
   <summary>(TODO) Manual Install with PlayOnLinux (with Screenshots)</summary>
@@ -104,6 +122,7 @@ Setup/Installer source files for the Infantry Online game:
 ## Thanks to all Contributors
 
 #### FreeInfantry
+ - Spiff
  - Realm (AKA Col. Kitty Hawk) for RnD/testing
  - Jovan for helping with the repo & website
  - SocketMix for PlayOnLinux manual install guide and testing
@@ -112,7 +131,8 @@ Setup/Installer source files for the Infantry Online game:
 #### CNC-DDraw
  - FunkyFr3sh for his work on cnc-ddraw to support this game for modern windows and WINE
 
-#### Wineskin
+#### Wine
  - Gcenx for his updates on WineSkin (originally created by doh123)
+ - The Crossover team for making 32-bit windows apps work on 64-bit macOS
 
 #### Many more people
