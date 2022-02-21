@@ -5,8 +5,34 @@
 Setup/Installer source files for the Infantry Online game:
 
 ## Windows
-**Windows 7 SP1 or later**
+**Windows XP or later**
 
+<details>
+  <summary>Building the "NSIS" Script</summary>
+
+>
+> **Download/Install First**
+> 
+> - NSIS, Nullsoft Scriptable Install System ([https://nsis.sourceforge.io](https://nsis.sourceforge.io))
+> 
+
+1. Clone/Download this Github Repo
+
+2. Obtain the official "Free Infantry Group" Launcher required files and place them in the folder here: "./Windows/_builds/launcher/"
+
+3. Open NSIS
+
+4. Click "Compile NSI Scripts"
+
+5. Choose "File" -> "Load Script..."
+
+6. Navigate to the "./Windows/nsis-Infantry-Online.nsi" script and choose "Open"
+
+7. It will automatically compile and (if no errors) will build the installer .exe here: "./Windows/_builds/installer/Install-Infantry-Online.exe"
+
+</details>
+
+<!--
 <details>
   <summary>(TODO) Building the "Advanced Installer"</summary>
 
@@ -24,11 +50,13 @@ Setup/Installer source files for the Infantry Online game:
 2. (TODO) More things...
 
 </details>
+-->
 
 <details>
-  <summary>(TODO) Installing the Game (with Screenshots)</summary>
+  <summary>Installing the Game (with Screenshots)</summary>
 
-- TODO
+TODO!
+![DMG Volume](Windows/_screenshots/nsis-installer-window.png)
 </details>
 
 
@@ -58,7 +86,7 @@ Setup/Installer source files for the Infantry Online game:
 > - `brew install create-dmg` ([https://github.com/create-dmg/create-dmg](https://github.com/create-dmg/create-dmg))
 > 
 
- 1. Place the built WineSkin wrapped client app here: "./Mac/_build/app/Infantry Online.app"
+ 1. Place the built WineSkin wrapped client app here: "./Mac/_builds/app/Infantry Online.app"
  2. Run the "./Mac/buildPackageDMG.sh" in the terminal to build a .pkg installer file and a distributable dmg file.
 </details>
 
@@ -78,7 +106,7 @@ Setup/Installer source files for the Infantry Online game:
 **Any Distro that WINE supports**
 
 <details>
-  <summary>PlayOnLinux Script (with Screenshots)</summary>
+  <summary>Running the PlayOnLinux Script (with Screenshots)</summary>
   
 >
 > **Download/Install First**
@@ -86,7 +114,7 @@ Setup/Installer source files for the Infantry Online game:
 > - PlayOnLinux ([https://www.playonlinux.com](https://www.playonlinux.com)), usually available with whatever linux default software distribution app you have. (ie: "Ubuntu Software" for Ubuntu, "Pamac Add/Remove Software" for Manjaro).
 > 
 
-1. Download the "play-on-linux-infantry-online.sh" Script from this repo
+1. Download the "./Linux/play-on-linux-infantry-online.sh" Script from this repo
 
 2. Open PlayOnLinux
 

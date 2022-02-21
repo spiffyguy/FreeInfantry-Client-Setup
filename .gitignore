@@ -1,6 +1,15 @@
+# Mac Ignore Files
 **/.DS_Store
 /Mac/_builds/app/**
 /Mac/_builds/dmg/**
 /Mac/_builds/pkg/**
+
+# Windows Ignore Files
+/Windows/_builds/installer/**
+/Windows/_builds/launcher/**
+
+# Linux Ignore Files
 *.snap
+
+# Global
 !**/.gitkeep
