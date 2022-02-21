@@ -1,3 +1,6 @@
+# Author : Spiff
+# Date : (2022-02-21 09-00)
+# Last revision : (2022-02-21 09-28)
 
 !define APPNAME "Infantry Online"
 !define COMPANYNAME "Free Infantry Group"
