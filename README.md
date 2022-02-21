@@ -8,7 +8,7 @@ Setup/Installer source files for the Infantry Online game:
 **Windows XP or later**
 
 <details>
-  <summary>Building the "NSIS" Script</summary>
+  <summary>Building the "NSIS" Script Installer</summary>
 
 >
 > **Download/Install First**
@@ -18,7 +18,7 @@ Setup/Installer source files for the Infantry Online game:
 
 1. Clone/Download this Github Repo
 
-2. Obtain the official "Free Infantry Group" Launcher required files and place them in the folder here: "./Windows/_builds/launcher/"
+2. Obtain the official Infantry Launcher required files and place them in the folder here: "./Windows/_builds/launcher/"
 
 3. Open NSIS
 
@@ -83,11 +83,15 @@ TODO!
 > **Download/Install First**
 > 
 > - Mac "Packages" app ([http://s.sudre.free.fr/Software/Packages/about.html](http://s.sudre.free.fr/Software/Packages/about.html))
+> - Homebrew, The Missing Package Manager for macOS ([https://brew.sh](https://brew.sh))
 > - `brew install create-dmg` ([https://github.com/create-dmg/create-dmg](https://github.com/create-dmg/create-dmg))
 > 
 
- 1. Place the built WineSkin wrapped client app here: "./Mac/_builds/app/Infantry Online.app"
- 2. Run the "./Mac/buildPackageDMG.sh" in the terminal to build a .pkg installer file and a distributable dmg file.
+1. Clone/Download this Github Repo
+
+2. Place the built Wineskin wrapped client app here: "./Mac/_builds/app/Infantry Online.app"
+
+3. Run the "./Mac/buildPackageDMG.sh" script in the terminal to build a .pkg installer file and a distributable dmg file.
 </details>
 
 <details>
@@ -150,9 +154,9 @@ TODO!
 ## Thanks to all Contributors
 
 #### FreeInfantry
- - Spiff
+ - Spiff (Shameless shoutout to myself)
  - Realm (AKA Col. Kitty Hawk) for RnD/testing
- - Jovan for helping with the repo & website
+ - Jovan for helping with source access & website
  - SocketMix for PlayOnLinux manual install guide and testing
  - The whole FreeInfantry team and players
 
