@@ -7,6 +7,7 @@
 # Windows Ignore Files
 /Windows/_builds/installer/**
 /Windows/_builds/launcher/**
+/Windows/_builds/cnc-ddraw/**
 
 # Linux Ignore Files
 *.snap

@@ -14,8 +14,8 @@
 !define UPDATEURL "http://www.freeinfantry.com" # "Product Updates" link
 !define ABOUTURL "http://www.freeinfantry.com" # "Publisher" link
 
-#TODO: need to confirm this...
-!define INSTALLSIZE 1258291
+#TODO: need to confirm this size...
+!define INSTALLSIZE 5940
 
 RequestExecutionLevel admin ;Require admin rights on NT6+ (When UAC is turned on)
 
@@ -53,27 +53,30 @@ section "install"
 
 	setOutPath $INSTDIR
 
-	#File /r "_builds\launcher\*"
-	#Main Infantry Launcher Files
+	#############
+	#	Files - Main Infantry Launcher
+	#############
 	File "_builds\launcher\InfantryLauncher.exe"
 	File "_builds\launcher\Newtonsoft.Json.dll"
 	File "_builds\launcher\default.ini"
 	File /r "_builds\launcher\imgs"
 	
-	# CNC-DDraw files
-	File "_builds\launcher\ddraw.dll"
-	File "_builds\launcher\ddraw.ini"
-	File "_builds\launcher\cnc-ddraw config.exe"
-	File /r "_builds\launcher\Shaders"
+	#############
+	#	Files - CNC-DDraw
+	#############
+	File "_builds\cnc-ddraw\ddraw.dll"
+	File "_builds\cnc-ddraw\ddraw.ini"
+	File "_builds\cnc-ddraw\cnc-ddraw config.exe"
+	File /r "_builds\cnc-ddraw\Shaders"
 	
 	#############
-	#	LAUNCHER
+	#	Registry - LAUNCHER
 	#############
  	WriteRegStr HKCU "Software\HarmlessGames\Infantry\Launcher" "Path" "$INSTDIR"
  	WriteRegStr HKCU "Software\HarmlessGames\Infantry\Launcher" "Version" "2.1.0.9"
 
 	#############
-	#	MISC
+	#	Registry - MISC
 	#############
 	WriteRegDWORD HKCU "Software\HarmlessGames\Infantry\Misc" "Accepted" 0x00000000
 	WriteRegDWORD HKCU "Software\HarmlessGames\Infantry\Misc" "BL" 0x00000000
@@ -87,7 +90,7 @@ section "install"
 	WriteRegDWORD HKCU "Software\HarmlessGames\Infantry\Misc" "ST" 0x00000000
 	 
 	#############
-	#	PROFILES
+	#	Registry - PROFILES
 	#############
  
 	# (This loops 6 times.... Profile5,Profile4,Profile3,Profile2,Profile1,Profile0)
@@ -286,7 +289,7 @@ section "install"
  		WriteRegDWORD HKCU "Software\HarmlessGames\Infantry\Profile$1\Options" "ViewSpeed" 0x00000005
  		WriteRegDWORD HKCU "Software\HarmlessGames\Infantry\Profile$1\Options" "ZoneSpecificMacros" 0x00000000
 
-	${Next} 
+	${Next}
   
 	# Give InfantryLauncher.exe admin rights.
  	WriteRegStr HKLM "SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" "$INSTDIR\InfantryLauncher.exeM.exe" "RUNASADMIN"
@@ -299,7 +302,7 @@ section "install"
 	createShortCut "$SMPROGRAMS\${APPNAME}\InfantryLauncher.lnk" "$INSTDIR\InfantryLauncher.exe" "" "$INSTDIR\imgs\infantry.ico"
  
 	# Registry information for add/remove programs
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "DisplayName" "${APPNAME} - ${DESCRIPTION}"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "DisplayName" "${APPNAME}"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "UninstallString" "$\"$INSTDIR\Uninstall Infantry Online.exe$\""
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "QuietUninstallString" "$\"$INSTDIR\Uninstall Infantry Online.exe$\" /S"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "InstallLocation" "$\"$INSTDIR$\""

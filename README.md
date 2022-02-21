@@ -11,25 +11,31 @@ Setup/Installer source files for the Infantry Online game:
   <summary>Building the "NSIS" Script Installer</summary>
 
 >
-> **Download/Install First**
+> **Prerequisites**
 > 
-> - NSIS, Nullsoft Scriptable Install System ([https://nsis.sourceforge.io](https://nsis.sourceforge.io))
+> 1. *[Download/Install]* NSIS, Nullsoft Scriptable Install System ([https://nsis.sourceforge.io](https://nsis.sourceforge.io))
+> 2. *[Download]* Built InfantryLauncher.exe & it's required files ([https://github.com/InfantryOnline/Infantry-Online-Server](https://github.com/InfantryOnline/Infantry-Online-Server))
+> 3. *[Download]* cnc-ddraw ([https://github.com/CnCNet/cnc-ddraw](https://github.com/CnCNet/cnc-ddraw))
 > 
-
-1. Clone/Download this Github Repo
-
-2. Obtain the official Infantry Launcher required files and place them in the folder here: "./Windows/_builds/launcher/"
-
-3. Open NSIS
-
-4. Click "Compile NSI Scripts"
-
-5. Choose "File" -> "Load Script..."
-
-6. Navigate to the "./Windows/nsis-Infantry-Online.nsi" script and choose "Open"
-
-7. It will automatically compile and (if no errors) will build the installer .exe here: "./Windows/_builds/installer/Install-Infantry-Online.exe"
-
+>
+> **Step By Step**
+>
+> 1. Clone/Download this Github Repo
+> 
+> 2. Move the Infantry Launcher files (InfantryLauncher.exe, default.ini, Newtonsoft.Json.dll & imgs folder) inside here: "./Windows/_builds/launcher/"
+>
+> 3. Edit the cnc-ddraw ddraw.ini file and set infantryhack=true.  Then place the 4 files (ddraw.dll, ddraw.ini, cnc-ddraw config.exe & Shaders folder) inside here: "./Windows/_builds/cnc-ddraw/"
+>
+> 4. Open the NSIS Application
+>
+> 5. Click "Compile NSI Scripts"
+>
+> 6. Choose "File" -> "Load Script..."
+> 
+> 7. Navigate to the "./Windows/nsis-Infantry-Online.nsi" script and choose "Open"
+>
+> 8. It will automatically compile and (if no errors) will build the installer .exe here: "./Windows/_builds/installer/"
+>
 </details>
 
 <!--
@@ -55,8 +61,9 @@ Setup/Installer source files for the Infantry Online game:
 <details>
   <summary>Installing the Game (with Screenshots)</summary>
 
-TODO!
-![DMG Volume](Windows/_screenshots/nsis-installer-window.png)
+>TODO!
+>![DMG Volume](Windows/_screenshots/nsis-installer-window.png)
+>
 </details>
 
 
@@ -67,43 +74,49 @@ TODO!
   <summary>(TODO) How to wrap the Windows .exe into a Mac .app with WineSkin</summary>
 
 >
-> **Download/Install First**
+> **Prerequisites**
 > 
-> - WineSkin Wrapper ([https://github.com/Gcenx/WineskinServer](https://github.com/Gcenx/WineskinServer))
-> - cnc-ddraw ([https://github.com/CnCNet/cnc-ddraw](https://github.com/CnCNet/cnc-ddraw))
+> 1. *[Download/Install]* Wineskin Wrapper ([https://github.com/Gcenx/WineskinServer](https://github.com/Gcenx/WineskinServer))
+> 2. *[Download]* cnc-ddraw ([https://github.com/CnCNet/cnc-ddraw](https://github.com/CnCNet/cnc-ddraw))
 > 
-
-- TODO
+>
+> **Step By Step**
+>
+> - TODO
+>
 </details>
 
 <details>
   <summary>Building the PKG Installer into a DMG</summary>
 
 >
-> **Download/Install First**
+> **Prerequisites**
 > 
-> - Mac "Packages" app ([http://s.sudre.free.fr/Software/Packages/about.html](http://s.sudre.free.fr/Software/Packages/about.html))
-> - Homebrew, The Missing Package Manager for macOS ([https://brew.sh](https://brew.sh))
-> - `brew install create-dmg` ([https://github.com/create-dmg/create-dmg](https://github.com/create-dmg/create-dmg))
+> 1. *[Download/Install]* Mac "Packages" app ([http://s.sudre.free.fr/Software/Packages/about.html](http://s.sudre.free.fr/Software/Packages/about.html))
+> 2. *[Download/Install]* Homebrew, The Missing Package Manager for macOS ([https://brew.sh](https://brew.sh))
+> 3. `brew install create-dmg` ([https://github.com/create-dmg/create-dmg](https://github.com/create-dmg/create-dmg))
 > 
-
-1. Clone/Download this Github Repo
-
-2. Place the built Wineskin wrapped client app here: "./Mac/_builds/app/Infantry Online.app"
-
-3. Run the "./Mac/buildPackageDMG.sh" script in the terminal to build a .pkg installer file and a distributable dmg file.
+> 
+> **Step By Step**
+>
+> 1. Clone/Download this Github Repo
+>
+> 2. Place the built Wineskin wrapped Infantry Online.app here: "./Mac/_builds/app/Infantry Online.app"
+>
+> 3. Run the "./Mac/buildPackageDMG.sh" script in the terminal and it will build a .pkg installer file here: "./Mac/_builds/pkg/" and a distributable dmg file here: "./Mac/_builds/dmg/"
+>
 </details>
 
 <details>
   <summary>Installing the Game (with Screenshots)</summary>
 
- - 1. Open the **DMG Volume Icon**
-
-![DMG Volume](Mac/_screenshots/DMGVolume.png)
-
- - 2. Open the **.pkg** file by Control-Click and choosing "Open" in the contextual menu
-
-![DMG Installer Window](Mac/_screenshots/DMGInstallerWindow.png)
+>
+> 1. Open the **DMG Volume Icon** on your desktop
+>![DMG Volume](Mac/_screenshots/DMGVolume.png)
+>
+> 2. Open the **.pkg** file by Control-Click and choosing "Open" in the contextual menu
+>![DMG Installer Window](Mac/_screenshots/DMGInstallerWindow.png)
+>
 </details>
 
 ## GNU/Linux
@@ -113,22 +126,24 @@ TODO!
   <summary>Running the PlayOnLinux Script (with Screenshots)</summary>
   
 >
-> **Download/Install First**
+> **Prerequisites**
 > 
-> - PlayOnLinux ([https://www.playonlinux.com](https://www.playonlinux.com)), usually available with whatever linux default software distribution app you have. (ie: "Ubuntu Software" for Ubuntu, "Pamac Add/Remove Software" for Manjaro).
+> 1. *[Download & Install]* PlayOnLinux ([https://www.playonlinux.com](https://www.playonlinux.com)), usually available with whatever linux default software distribution app you have. (ie: "Ubuntu Software" for Ubuntu, "Pamac Add/Remove Software" for Manjaro).
 > 
-
-1. Download the "./Linux/play-on-linux-infantry-online.sh" Script from this repo
-
-2. Open PlayOnLinux
-
-3. Open the Tools menu and choose "Run a local script"
-
- ![PlayOnLinux Tools Run Local Script](Linux/_screenshots/POL_Tools-Menu_Run-Local-Script.png)
- 
-4. Navigate to the downloaded "play-on-linux-infantry-online.sh" script.
-
-5. Follow the prompts and Infantry will be installed and ready to play!
+> 
+> **Step By Step**
+>
+> 1. Download the "./Linux/play-on-linux-infantry-online.sh" Script from this repo
+>
+> 2. Open PlayOnLinux
+>
+> 3. Open the Tools menu and choose "Run a local script"
+>![PlayOnLinux Tools Run Local Script](Linux/_screenshots/POL_Tools-Menu_Run-Local-Script.png)
+>
+> 4. Navigate to the downloaded "play-on-linux-infantry-online.sh" script.
+>
+> 5. Follow the prompts and Infantry will be installed and ready to play!
+>
 </details>
 
 <!-- 
@@ -148,7 +163,16 @@ TODO!
 <details>
   <summary>(TODO) Manual Install with PlayOnLinux (with Screenshots)</summary>
 
-- TODO
+>
+> **Prerequisites**
+> 
+> - TODO
+> 
+>
+> **Step By Step**
+>
+> - TODO
+>
 </details>
 
 ## Thanks to all Contributors
