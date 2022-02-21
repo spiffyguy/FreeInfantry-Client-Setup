@@ -1,42 +1,32 @@
-# This installs two files, app.exe and logo.ico, creates a start menu shortcut, builds an uninstaller, and
-# adds uninstall information to the registry for Add/Remove Programs
 
-# To get started, put this script into a folder with the two files (app.exe, logo.ico, and license.rtf -
-# You'll have to create these yourself) and run makensis on it
-
-# If you change the names "app.exe", "logo.ico", or "license.rtf" you should do a search and replace - they
-# show up in a few places.
-# All the other settings can be tweaked by editing the !defines at the top of this script
 !define APPNAME "Infantry Online"
 !define COMPANYNAME "Free Infantry Group"
 !define DESCRIPTION "Infantry is an online-only multiplayer action game with a science fiction theme. Players can spectate or join one of multiple game types running simultaneously, and communicate through an in-game chat window."
-# These three must be integers
+
 !define VERSIONMAJOR 1
 !define VERSIONMINOR 55
 !define VERSIONBUILD 0
-# These will be displayed by the "Click here for support information" link in "Add/Remove Programs"
-# It is possible to use "mailto:" links in here to open the email client
-!define HELPURL "http://www.freeinfantry.com" # "Support Information" link
+
+!define HELPURL "https://discord.gg/2avPSyv" # "Support Information" link
 !define UPDATEURL "http://www.freeinfantry.com" # "Product Updates" link
 !define ABOUTURL "http://www.freeinfantry.com" # "Publisher" link
-# This is the size (in kB) of all the files copied into "Program Files"
+
+#TODO: need to confirm this...
 !define INSTALLSIZE 512000
 
 RequestExecutionLevel admin ;Require admin rights on NT6+ (When UAC is turned on)
 
 InstallDir "$PROGRAMFILES\${APPNAME}"
 
-# rtf or txt file - remember if it is txt, it must be in the DOS text format (\r\n)
 #LicenseData "license.rtf"
-# This will be in the installer/uninstaller's title bar
+
 Name "${APPNAME} - ${COMPANYNAME}"
 Icon "_builds\launcher\imgs\infantry.ico"
 outFile "_builds\installer\Install-Infantry-Online.exe"
 
 !include LogicLib.nsh
 
-# Just three pages - license agreement, install location, and installation
-page license
+#page license
 page directory
 Page instfiles
 
@@ -57,21 +47,22 @@ function .onInit
 functionEnd
 
 section "install"
-	# Files for the install directory - to build the installer, these should be in the same directory as the install script (this file)
+
 	setOutPath $INSTDIR
-	# Files added here should be removed by the uninstaller (see section "uninstall")
+
 	File /r "_builds\launcher\*"
 	#file "InfantryLauncher.exe"
 	#file "Newtonsoft.Json.dll"
 	#file "default.ini"
 	#file /r "imgs"
-	# Add any other files for the install directory (license files, app data, etc) here
+ 
+	# TODO: need to add all the required registry stuff for the game.
  
 	# Give InfantryLauncher.exe admin rights.
  	WriteRegStr HKEY_LOCAL_MACHINE "SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" "$INSTDIR\InfantryLauncher.exeM.exe" "RUNASADMIN"
  
 	# Uninstaller - See function un.onInit and section "uninstall" for configuration
-	writeUninstaller "$INSTDIR\uninstall.exe"
+	writeUninstaller "$INSTDIR\Uninstall Infantry Online.exe"
  
 	# Start Menu
 	createDirectory "$SMPROGRAMS\${APPNAME}"
@@ -79,8 +70,8 @@ section "install"
  
 	# Registry information for add/remove programs
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "DisplayName" "${APPNAME} - ${DESCRIPTION}"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "UninstallString" "$\"$INSTDIR\uninstall.exe$\""
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "QuietUninstallString" "$\"$INSTDIR\uninstall.exe$\" /S"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "UninstallString" "$\"$INSTDIR\Uninstall Infantry Online.exe$\""
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "QuietUninstallString" "$\"$INSTDIR\Uninstall Infantry Online.exe$\" /S"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "InstallLocation" "$\"$INSTDIR$\""
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "DisplayIcon" "$\"$INSTDIR\imgs\infantry.ico$\""
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "Publisher" "$\"${COMPANYNAME}$\""
@@ -120,7 +111,7 @@ section "uninstall"
 	#delete $INSTDIR\logo.ico
  
 	# Always delete uninstaller as the last action
-	delete $INSTDIR\uninstall.exe
+	delete $INSTDIR\Uninstall Infantry Online.exe
  
 	# Try to remove the install directory
 	rmDir /r $INSTDIR
