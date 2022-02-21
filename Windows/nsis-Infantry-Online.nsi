@@ -1,6 +1,6 @@
 # Author : Spiff
 # Date : (2022-02-21 09-00)
-# Last revision : (2022-02-21 09-28)
+# Last revision : (2022-02-21 11-48)
 
 !define APPNAME "Infantry Online"
 !define COMPANYNAME "Free Infantry Group"
@@ -15,13 +15,13 @@
 !define ABOUTURL "http://www.freeinfantry.com" # "Publisher" link
 
 #TODO: need to confirm this...
-!define INSTALLSIZE 512000
+!define INSTALLSIZE 1258291
 
 RequestExecutionLevel admin ;Require admin rights on NT6+ (When UAC is turned on)
 
 InstallDir "$PROGRAMFILES\${APPNAME}"
 
-#LicenseData "license.rtf"
+LicenseData "_assets/License.rtf"
 
 Name "${APPNAME} - ${COMPANYNAME}"
 Icon "_builds\launcher\imgs\infantry.ico"
@@ -29,7 +29,7 @@ outFile "_builds\installer\Install-Infantry-Online.exe"
 
 !include LogicLib.nsh
 
-#page license
+page license
 page directory
 Page instfiles
 
@@ -53,12 +53,19 @@ section "install"
 
 	setOutPath $INSTDIR
 
-	File /r "_builds\launcher\*"
-	#file "InfantryLauncher.exe"
-	#file "Newtonsoft.Json.dll"
-	#file "default.ini"
-	#file /r "imgs"
-  
+	#File /r "_builds\launcher\*"
+	#Main Infantry Launcher Files
+	File "_builds\launcher\InfantryLauncher.exe"
+	File "_builds\launcher\Newtonsoft.Json.dll"
+	File "_builds\launcher\default.ini"
+	File /r "_builds\launcher\imgs"
+	
+	# CNC-DDraw files
+	File "_builds\launcher\ddraw.dll"
+	File "_builds\launcher\ddraw.ini"
+	File "_builds\launcher\cnc-ddraw config.exe"
+	File /r "_builds\launcher\Shaders"
+	
 	#############
 	#	LAUNCHER
 	#############
@@ -83,7 +90,7 @@ section "install"
 	#	PROFILES
 	#############
  
-	# (This loops 6 times.... 5,4,3,2,1,0) TODO: count forwards?  doesn't hurt backwards...
+	# (This loops 6 times.... Profile5,Profile4,Profile3,Profile2,Profile1,Profile0)
 	${ForEach} $1 5 0 - 1
 		
  		WriteRegStr HKCU "Software\HarmlessGames\Infantry\Profile$1\Chat" "Channel0" "newbies"
@@ -338,6 +345,8 @@ section "uninstall"
  
 	# Try to remove the install directory
 	rmDir /r $INSTDIR
+ 
+	# TODO: Remove windows registry items?
  
 	# Remove uninstaller information from the registry
 	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}"
