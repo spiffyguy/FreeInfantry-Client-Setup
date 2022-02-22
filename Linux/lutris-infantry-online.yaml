@@ -18,24 +18,24 @@ script:
     working_dir: $GAMEDIR/drive_c/Program Files/Infantry Online/
   
   files:
-  - infantryinstaller: http://freeinfantry.com/Infantry%20Online%20Setup.exe
-  - cnc_ddraw: https://download1076.mediafire.com/eit65r2wpxgg/5owkpgxd37sdqvo/InfantryOnline_cnc-ddraw_4460b_opengl.zip
+  - infantryinstaller: https://github.com/spiffyguy/Infantry-Online-Client-Setup/releases/download/alpha-test/Install-Infantry-Online-v1.55.0-alpha.exe
 
   installer:
   - task:
-      app: dotnet45
-      description: Installing .NET 4.5...
+      app: dotnet452
+      description: Step (1/2) - Installing .NET 4.5.2...
       name: winetricks
       prefix: $GAMEDIR
   - task:
-      description: Installing Infantry Online. Please choose the default location.
+      description: Step (2/2) - Installing Infantry Online.
       executable: infantryinstaller
+      args: /ddraw=opengl /S
       name: wineexec
       prefix: $GAMEDIR
-  - extract:
-      dst: $GAMEDIR/drive_c/Program Files/Infantry Online/
-      file: cnc_ddraw
   wine:
       dxvk: false
+      vkd3d: false
+      d3d_extras: false
+      dxvk_nvapi: false
       overrides:
           ddraw.dll: n,b
