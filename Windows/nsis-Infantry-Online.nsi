@@ -154,7 +154,7 @@ ${EndIf}
 	#	Registry - PROFILES
 	#############
  
-	# (This loops 6 times.... Profile5,Profile4,Profile3,Profile2,Profile1,Profile0)
+	# (This loops 6 times.... ie: Profile5,Profile4,Profile3,Profile2,Profile1,Profile0)
 	${ForEach} $1 5 0 - 1
 		
  		!insertmacro MaybeWriteRegStr "Software\HarmlessGames\Infantry\Profile$1\Login" "Name" "" ${key_override}
@@ -380,7 +380,7 @@ Section "${APPNAME}" Seclauncher
 	setOutPath $INSTDIR
 
 	#############
-	#	Files - Main Infantry Launcher
+	#	Main Infantry Launcher
 	#############
 	File "_builds\launcher\InfantryLauncher.exe"
 	File "_builds\launcher\Newtonsoft.Json.dll"
@@ -504,9 +504,6 @@ Function .onInit
 FunctionEnd
 
 Function .onSelChange
-
-
-
 
 	# Only allow 1 ddraw selection at a time....
 	Push $0
