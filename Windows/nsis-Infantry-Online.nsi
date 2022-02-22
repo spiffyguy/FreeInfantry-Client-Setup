@@ -48,6 +48,8 @@ outFile "_builds\installer\Install-Infantry-Online.exe"
 !define MUI_UNICON "_assets\images\floppy.ico"
 
 Var defaultCncddrawRenderer
+Var screenResolutionWidth
+Var screenResolutionHeight
 
 # PAGES
 
@@ -305,8 +307,8 @@ ${EndIf}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "RenderBackground" 0x00000001 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "RenderParallax" 0x00000001 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "RenderStarfield" 0x00000001 ${key_override}
- 		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "ResolutionX" 0x00000000 ${key_override}
- 		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "ResolutionY" 0x00000000 ${key_override}
+ 		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "ResolutionX" $screenResolutionWidth ${key_override}
+ 		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "ResolutionY" $screenResolutionHeight ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "RollMode" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "RotateRampTime" 0x00000019 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "RotationCount" 0x00000040 ${key_override}
@@ -465,6 +467,11 @@ Function .onInit
 	setShellVarContext all
 	StrCpy $INSTDIR "$PROGRAMFILES\${APPNAME}"
 	!insertmacro VerifyUserIsAdmin
+	
+	System::Call 'user32::GetSystemMetrics(i 0) i .r0'
+	System::Call 'user32::GetSystemMetrics(i 1) i .r1'
+	StrCpy $screenResolutionWidth "$0"
+	StrCpy $screenResolutionHeight "$1"
 	
 	# Get a /ddraw override from the command line
 	StrCpy $defaultCncddrawRenderer "auto"
