@@ -1,0 +1,41 @@
+# Date : (2022-02-20 14-00)
+# Last revision : (2022-02-20 14-00)
+# Wine version used : 5.0.0
+# Distribution used to test : Ubuntu 20.04 LTS
+# Author : Spiff
+
+name: Infantry Online
+game_slug: infantry-online
+version: Installer
+slug: infantry-online-installer
+runner: wine
+
+script:
+  game:
+    arch: win32
+    exe: $GAMEDIR/drive_c/Program Files/Infantry Online/InfantryLauncher.exe
+    prefix: $GAMEDIR
+    working_dir: $GAMEDIR/drive_c/Program Files/Infantry Online/
+  
+  files:
+  - infantryinstaller: https://github.com/spiffyguy/Infantry-Online-Client-Setup/releases/download/alpha-test/Install-Infantry-Online-v1.55.0-alpha.exe
+
+  installer:
+  - task:
+      app: dotnet452
+      description: Step (1/2) - Installing .NET 4.5.2...
+      name: winetricks
+      prefix: $GAMEDIR
+  - task:
+      description: Step (2/2) - Installing Infantry Online.
+      executable: infantryinstaller
+      args: /ddraw=opengl /S
+      name: wineexec
+      prefix: $GAMEDIR
+  wine:
+      dxvk: false
+      vkd3d: false
+      d3d_extras: false
+      dxvk_nvapi: false
+      overrides:
+          ddraw.dll: n,b
