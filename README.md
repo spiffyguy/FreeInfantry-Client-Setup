@@ -147,17 +147,34 @@ Setup/Installer source files for the Infantry Online game:
 >
 > 4. Navigate to the downloaded "play-on-linux-infantry-online.sh" script.
 >
-> 5. Follow the prompts and Infantry will be installed and ready to play!
+> 5. Follow the prompts and Infantry Online will be installed and ready to play!
 >
 </details>
 
-<!-- 
 <details>
-  <summary>(TODO) Lutris Script</summary>
+  <summary>Running the Lutris Script (with Screenshots)</summary>
 
-- TODO
+>
+> **Prerequisites**
+> 
+> 1. *[Download & Install]* Lutris ([https://lutris.net](https://lutris.net))
+> 
+> 
+> **Step By Step**
+>
+> 1. Download the "./Linux/lutris-infantry-online.yaml" Script from this repo
+>
+> 2. Open the Terminal
+>
+> 3. Enter the command `lutris -i lutris-infantry-online.yaml` and hit enter.  Lutris will open.
+>
+> 4. Click the "Install" button on the right.
+>![Lutris Install Infantry Online Prompt](Linux/_screenshots/Lutris-Install-Infantry-Online-Prompt.png)
+>
+> 5. Follow the prompts and Infantry Online will be installed and ready to play!
 </details>
 
+<!--
 <details>
   <summary>(TODO) Building SnapCraft Script</summary>
 
