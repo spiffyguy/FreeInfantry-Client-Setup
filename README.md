@@ -24,7 +24,7 @@ Setup/Installer source files for the Infantry Online game:
 > 
 > 2. Move the Infantry Launcher files (InfantryLauncher.exe, default.ini, Newtonsoft.Json.dll & imgs folder) inside here: "./Windows/_builds/launcher/"
 >
-> 3. Edit the cnc-ddraw ddraw.ini file and set infantryhack=true.  Then place the 4 files (ddraw.dll, ddraw.ini, cnc-ddraw config.exe & Shaders folder) inside here: "./Windows/_builds/cnc-ddraw/"
+> 3. Move the 4 cnc-ddraw files (ddraw.dll, ddraw.ini, cnc-ddraw config.exe & Shaders folder) inside here: "./Windows/_builds/cnc-ddraw/"
 >
 > 4. Open the NSIS Application
 >
@@ -34,7 +34,7 @@ Setup/Installer source files for the Infantry Online game:
 > 
 > 7. Navigate to the "./Windows/nsis-Infantry-Online.nsi" script and choose "Open"
 >
-> 8. It will automatically compile and (if no errors) will build the installer .exe here: "./Windows/_builds/installer/"
+> 8. It will automatically compile and (if no errors) will build the distributable installer .exe here: "./Windows/_builds/installer/"
 >
 </details>
 
