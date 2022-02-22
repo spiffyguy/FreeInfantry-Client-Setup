@@ -61,8 +61,13 @@ Setup/Installer source files for the Infantry Online game:
 <details>
   <summary>Installing the Game (with Screenshots)</summary>
 
->TODO!
->![DMG Volume](Windows/_screenshots/nsis-installer-window.png)
+>![Welcome Screen](Windows/_screenshots/nsis-welcome-screen.png)
+>
+>![License Screen](Windows/_screenshots/nsis-license-screen.png)
+>
+>![Components Screen](Windows/_screenshots/nsis-components-screen.png)
+>
+>![Finish Screen](Windows/_screenshots/nsis-finish-screen.png)
 >
 </details>
 

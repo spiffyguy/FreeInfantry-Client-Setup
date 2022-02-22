@@ -17,13 +17,10 @@
 #TODO: need to confirm this size...
 !define INSTALLSIZE 5940
 
-
-!define MUI_WELCOMEFINISHPAGE_BITMAP "_assets\images\welcomefinish.bmp" ; optional 164x314
-
+!define MUI_WELCOMEFINISHPAGE_BITMAP "_assets\images\welcomefinish.bmp" # 164x314
 !define MUI_HEADERIMAGE
-!define MUI_HEADERIMAGE_BITMAP "_assets\images\header.bmp" ; optional 150x57
+!define MUI_HEADERIMAGE_BITMAP "_assets\images\header.bmp" # 150x57
 !define MUI_ABORTWARNING
-
 !define MUI_BGCOLOR 000000
 !define MUI_TEXTCOLOR ffffff
 #!define MUI_LICENSEPAGE_BGCOLOR 000000
@@ -34,6 +31,7 @@
 !define MUI_FINISHPAGE_LINK_COLOR ffffff
 
 !include "MUI2.nsh"
+!include FileFunc.nsh
 !include LogicLib.nsh
 Unicode True
 
@@ -48,6 +46,8 @@ outFile "_builds\installer\Install-Infantry-Online.exe"
 
 !define MUI_ICON "_assets\images\floppy.ico" 
 !define MUI_UNICON "_assets\images\floppy.ico"
+
+Var defaultCncddrawRenderer
 
 # PAGES
 
@@ -156,6 +156,10 @@ ${EndIf}
  
 	# (This loops 6 times.... Profile5,Profile4,Profile3,Profile2,Profile1,Profile0)
 	${ForEach} $1 5 0 - 1
+		
+ 		!insertmacro MaybeWriteRegStr "Software\HarmlessGames\Infantry\Profile$1\Login" "Name" "" ${key_override}
+ 		!insertmacro MaybeWriteRegStr "Software\HarmlessGames\Infantry\Profile$1\Login" "ParentName" "" ${key_override}
+ 		!insertmacro MaybeWriteRegStr "Software\HarmlessGames\Infantry\Profile$1\Login" "ServerName" "" ${key_override}
 		
  		!insertmacro MaybeWriteRegStr "Software\HarmlessGames\Infantry\Profile$1\Chat" "Channel0" "newbies" ${key_override}
  		!insertmacro MaybeWriteRegStr "Software\HarmlessGames\Infantry\Profile$1\Chat" "Channel1" "" ${key_override}
@@ -354,12 +358,22 @@ ${EndIf}
 
 !macroend
 
+!macro editandinstallcncddraw renderername
 
-function .onInit
-	setShellVarContext all
-	StrCpy $INSTDIR "$PROGRAMFILES\${APPNAME}"
-	!insertmacro VerifyUserIsAdmin
-functionEnd
+	SetOutPath "$INSTDIR"
+  
+	#############
+	#	Files - CNC-DDraw
+	#############
+	File "_builds\cnc-ddraw\ddraw.dll"
+	File "_builds\cnc-ddraw\ddraw.ini"
+	File "_builds\cnc-ddraw\cnc-ddraw config.exe"
+	File /r "_builds\cnc-ddraw\Shaders"
+	
+	WriteINIStr $INSTDIR\ddraw.ini ddraw infantryhack true
+	WriteINIStr $INSTDIR\ddraw.ini ddraw renderer "${renderername}"
+
+!macroend
 
 Section "${APPNAME}" Seclauncher
 
@@ -414,37 +428,132 @@ Section "${APPNAME}" Seclauncher
 	!insertmacro WriteInfantryRegistry "0"
 	
 SectionEnd
-Section "cnc-ddraw" Seccncddraw
 
-	SetOutPath "$INSTDIR"
-  
-	#############
-	#	Files - CNC-DDraw
-	#############
-	File "_builds\cnc-ddraw\ddraw.dll"
-	File "_builds\cnc-ddraw\ddraw.ini"
-	File "_builds\cnc-ddraw\cnc-ddraw config.exe"
-	File /r "_builds\cnc-ddraw\Shaders"
-
+# "auto" right now means direct3d9/opengl, gdi fallback, so using auto instead of only "direct3d9"
+Section "cnc-ddraw, d3d9" Seccncddraw-auto
+	!insertmacro editandinstallcncddraw "auto"
 SectionEnd
-Section /o "Reset Registry" Secfixregistry
 
-	!insertmacro WriteInfantryRegistry "1"
+Section /o "cnc-ddraw, opengl" Seccncddraw-opengl
+	!insertmacro editandinstallcncddraw "opengl"
+SectionEnd
 
-sectionEnd
+SectionGroup "Reset/Clear"
+	Section /o "Registry Settings" Secfixregistry
+	
+		!insertmacro WriteInfantryRegistry "1"
+			
+	sectionEnd
+	
+	Section /o "Saved Login" Secclearsavedlogin
+		
+		IfFileExists "$INSTDIR\settings.ini" file_found file_not_found
+		file_found:
+			WriteINIStr $INSTDIR\settings.ini Credentials Username ""
+			WriteINIStr $INSTDIR\settings.ini Credentials Password ""
+
+			goto end_of_test
+		file_not_found:
+			# Nothing to do, already cleared
+		end_of_test:
+			# Done checking for settings.ini
+			
+	sectionEnd
+SectionGroupEnd
+
+Function .onInit
+	setShellVarContext all
+	StrCpy $INSTDIR "$PROGRAMFILES\${APPNAME}"
+	!insertmacro VerifyUserIsAdmin
+	
+	# Get a /ddraw override from the command line
+	StrCpy $defaultCncddrawRenderer "auto"
+	${GetParameters} $0
+	ClearErrors
+	${GetOptions} $0 "/ddraw=" $1
+	${IfNot} ${Errors}
+		StrCpy $defaultCncddrawRenderer $1
+	${EndIf}
+	
+	# Only allow 1 ddraw selection at a time....
+	Push $0
+	
+	StrCpy $R9 ${Seccncddraw-auto} # Gotta remember which section we are at now...
+	SectionGetFlags ${Seccncddraw-auto} $0
+	IntOp $0 $0 | ${SF_SELECTED}
+	SectionSetFlags ${Seccncddraw-auto} $0
+	
+	SectionGetFlags ${Seccncddraw-opengl} $0
+	IntOp $0 $0 & ${SECTION_OFF}
+	SectionSetFlags ${Seccncddraw-opengl} $0
+	
+	# Look at the ddraw override command line....
+	# TODO: allow gdi as well
+	${IF} $defaultCncddrawRenderer == "opengl"
+		StrCpy $R9 ${Seccncddraw-opengl}
+		SectionGetFlags ${Seccncddraw-opengl} $0
+		IntOp $0 $0 | ${SF_SELECTED}
+		SectionSetFlags ${Seccncddraw-opengl} $0
+		SectionGetFlags ${Seccncddraw-auto} $0
+		IntOp $0 $0 & ${SECTION_OFF}
+		SectionSetFlags ${Seccncddraw-auto} $0
+	${ENDIF}
+	
+	Pop $0
+	
+FunctionEnd
+
+Function .onSelChange
+
+
+
+
+	# Only allow 1 ddraw selection at a time....
+	Push $0
+	
+	StrCmp $R9 ${Seccncddraw-auto} check_Seccncddraw-auto
+	
+	SectionGetFlags ${Seccncddraw-auto} $0
+	IntOp $0 $0 & ${SF_SELECTED}
+	IntCmp $0 ${SF_SELECTED} 0 done done
+		StrCpy $R9 ${Seccncddraw-auto}
+		SectionGetFlags ${Seccncddraw-opengl} $0
+		IntOp $0 $0 & ${SECTION_OFF}
+		SectionSetFlags ${Seccncddraw-opengl} $0
+	
+	Goto done
+	
+	check_Seccncddraw-auto:
+		
+		SectionGetFlags ${Seccncddraw-opengl} $0
+		IntOp $0 $0 & ${SF_SELECTED}
+		IntCmp $0 ${SF_SELECTED} 0 done done
+			StrCpy $R9 ${Seccncddraw-opengl}
+			SectionGetFlags ${Seccncddraw-auto} $0
+			IntOp $0 $0 & ${SECTION_OFF}
+			SectionSetFlags ${Seccncddraw-auto} $0
+		
+	done:
+	
+	Pop $0
+FunctionEnd
 
 # Descriptions
 
   # Language strings
-  LangString DESC_Seclauncher ${LANG_ENGLISH} "Official Infantry Online Launcher"
-  LangString DESC_Seccncddraw ${LANG_ENGLISH} "cnc-ddraw Library, Fixes fullscreen and improves FPS"
-  LangString DESC_Secfixregistry ${LANG_ENGLISH} "Reset Infantry Online Registry settings to their default values."
+  LangString DESC_Seclauncher ${LANG_ENGLISH} "Official Infantry Online Launcher.$\r$\n$\r$\nBrought to you by ${COMPANYNAME}."
+  LangString DESC_Seccncddraw-auto ${LANG_ENGLISH} "cnc-ddraw Library, Fixes fullscreen and improves FPS.$\r$\n$\r$\nDirect3d9 Renderer. (best for Windows)"
+  LangString DESC_Seccncddraw-opengl ${LANG_ENGLISH} "cnc-ddraw Library, Fixes fullscreen and improves FPS.$\r$\n$\r$\nOpenGL Renderer. (best for Mac/Linux)"
+  LangString DESC_Secfixregistry ${LANG_ENGLISH} "Reset Infantry Online Registry settings to their default values.$\r$\n$\r$\nThis would reset keyboard/mouse settings and aliases.$\r$\n$\r$\nCANNOT UNDO."
+  LangString DESC_Secclearsavedlogin ${LANG_ENGLISH} "Clear saved login credentials.$\r$\n$\r$\nThis would clear the saved username/password in the launcher.$\r$\n$\r$\nCANNOT UNDO."
 
   # Assign language strings to sections
   !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
   !insertmacro MUI_DESCRIPTION_TEXT ${Seclauncher} $(DESC_Seclauncher)
-  !insertmacro MUI_DESCRIPTION_TEXT ${Seccncddraw} $(DESC_Seccncddraw)
+  !insertmacro MUI_DESCRIPTION_TEXT ${Seccncddraw-auto} $(DESC_Seccncddraw-auto)
+  !insertmacro MUI_DESCRIPTION_TEXT ${Seccncddraw-opengl} $(DESC_Seccncddraw-opengl)
   !insertmacro MUI_DESCRIPTION_TEXT ${Secfixregistry} $(DESC_Secfixregistry)
+  !insertmacro MUI_DESCRIPTION_TEXT ${Secclearsavedlogin} $(DESC_Secclearsavedlogin)
   !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 # Uninstaller

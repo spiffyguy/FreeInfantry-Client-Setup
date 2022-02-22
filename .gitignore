@@ -5,6 +5,7 @@
 /Mac/_builds/pkg/**
 
 # Windows Ignore Files
+**/Thumbs.db
 /Windows/_builds/installer/**
 /Windows/_builds/launcher/**
 /Windows/_builds/cnc-ddraw/**
