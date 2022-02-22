@@ -1,6 +1,6 @@
 #!/usr/bin/env playonlinux-bash
 # Date : (2022-02-17 07-00)
-# Last revision : (2022-02-22 05-55)
+# Last revision : (2022-02-22 09-07)
 # Wine version used : 5.0.0
 # Distribution used to test : Ubuntu 20.04 LTS
 # Author : Spiff
