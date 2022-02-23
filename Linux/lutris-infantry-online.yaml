@@ -18,7 +18,7 @@ script:
     working_dir: "$GAMEDIR/drive_c/Program Files/Infantry Online/"
   
   files:
-  - infantryinstaller: "https://github.com/spiffyguy/Infantry-Online-Client-Setup/releases/download/alpha-test/Install-Infantry-Online-v1.55.0-alpha.exe"
+  - infantryinstaller: "http://freeinfantry.com/download/files/Install-Infantry-Online-v1.55.0-alpha.exe"
 
   installer:
   - task:
