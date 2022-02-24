@@ -1,6 +1,6 @@
 # Author : Spiff
 # Date : (2022-02-21 09-00)
-# Last revision : (2022-02-21 20-18)
+# Last revision : (2022-02-24 06-21)
 
 !define APPNAME "Infantry Online"
 !define COMPANYNAME "Free Infantry Group"
@@ -17,9 +17,9 @@
 #TODO: need to confirm this size...
 !define INSTALLSIZE 5940
 
-!define MUI_WELCOMEFINISHPAGE_BITMAP "_assets\images\welcomefinish.bmp" # 164x314
+!define MUI_WELCOMEFINISHPAGE_BITMAP "_assets\images\nsis-welcomefinish-164x314.bmp"
 !define MUI_HEADERIMAGE
-!define MUI_HEADERIMAGE_BITMAP "_assets\images\header.bmp" # 150x57
+!define MUI_HEADERIMAGE_BITMAP "_assets\images\nsis-header-150x57.bmp"
 !define MUI_ABORTWARNING
 !define MUI_BGCOLOR 000000
 !define MUI_TEXTCOLOR ffffff
@@ -131,12 +131,6 @@ ${EndIf}
 !macroend
 
 !macro WriteInfantryRegistry key_override
-
-	#############
-	#	Registry - LAUNCHER
-	#############
- 	WriteRegStr HKCU "Software\HarmlessGames\Infantry\Launcher" "Path" "$INSTDIR"
- 	WriteRegStr HKCU "Software\HarmlessGames\Infantry\Launcher" "Version" "2.1.0.9"
 
 	#############
 	#	Registry - MISC
@@ -412,6 +406,12 @@ Section "${APPNAME}" Seclauncher
 			CreateShortCut "$SMPROGRAMS\$StartMenuFolder\${APPNAME}.lnk" "$INSTDIR\InfantryLauncher.exe" "" "$INSTDIR\imgs\infantry.ico"
 		${ENDIF}
 	${ENDIF}
+	
+	#############
+	#	Registry - LAUNCHER
+	#############
+ 	WriteRegStr HKCU "Software\HarmlessGames\Infantry\Launcher" "Path" "$INSTDIR"
+ 	WriteRegStr HKCU "Software\HarmlessGames\Infantry\Launcher" "Version" "2.1.0.9"
 	
  	#############
 	#	Uninstaller
