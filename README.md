@@ -4,7 +4,7 @@
 
 Navigate the sections below for instructions on how to compile or run the Installer source files for Infantry Online on each platform.
 
-## Windows
+## Windows Installer
 **Windows XP or later (Yes, including Windows 11)**
 
 <details>
@@ -13,7 +13,7 @@ Navigate the sections below for instructions on how to compile or run the Instal
 >
 > **Prerequisites**
 > 
-> 1. *[Download/Install]* NSIS, Nullsoft Scriptable Install System ([https://nsis.sourceforge.io](https://nsis.sourceforge.io))
+> 1. *[Download & Install]* NSIS, Nullsoft Scriptable Install System ([https://nsis.sourceforge.io](https://nsis.sourceforge.io))
 > 2. *[Download]* Built InfantryLauncher.exe & it's required files ([https://github.com/InfantryOnline/Infantry-Online-Server](https://github.com/InfantryOnline/Infantry-Online-Server))
 > 3. *[Download]* cnc-ddraw ([https://github.com/CnCNet/cnc-ddraw](https://github.com/CnCNet/cnc-ddraw))
 > 
@@ -38,29 +38,10 @@ Navigate the sections below for instructions on how to compile or run the Instal
 >
 </details>
 
-<!--
-<details>
-  <summary>(TODO) Building the "Advanced Installer"</summary>
-
->
-> **Download/Install First**
-> 
-> - Visual Studio 2019 Community Edition ([https://visualstudio.microsoft.com/vs/older-downloads/](https://visualstudio.microsoft.com/vs/older-downloads/))
-> 
-
-1. Get the official Infantry Online Launcher .exe file either from:
-
-	- Compiling yourself from the Launcher repo or
-	- Downloading the windows launcher exe
-
-2. (TODO) More things...
-
-</details>
--->
-
 <details>
   <summary>Installing the Game (with Screenshots)</summary>
 
+> 
 >![Welcome Screen](Windows/_screenshots/nsis-welcome-screen.png)
 >
 >![License Screen](Windows/_screenshots/nsis-license-screen.png)
@@ -72,7 +53,7 @@ Navigate the sections below for instructions on how to compile or run the Instal
 </details>
 
 
-## macOS
+## macOS Installer
 **macOS 10.13 (High Sierra) or later**
 
 <details>
@@ -81,7 +62,7 @@ Navigate the sections below for instructions on how to compile or run the Instal
 >
 > **Prerequisites**
 > 
-> 1. *[Download/Install]* Wineskin Wrapper ([https://github.com/Gcenx/WineskinServer](https://github.com/Gcenx/WineskinServer))
+> 1. *[Download & Install]* Wineskin Wrapper ([https://github.com/Gcenx/WineskinServer](https://github.com/Gcenx/WineskinServer))
 > 2. *[Download]* cnc-ddraw ([https://github.com/CnCNet/cnc-ddraw](https://github.com/CnCNet/cnc-ddraw))
 > 
 >
@@ -97,8 +78,8 @@ Navigate the sections below for instructions on how to compile or run the Instal
 >
 > **Prerequisites**
 > 
-> 1. *[Download/Install]* Mac "Packages" app ([http://s.sudre.free.fr/Software/Packages/about.html](http://s.sudre.free.fr/Software/Packages/about.html))
-> 2. *[Download/Install]* Homebrew, The Missing Package Manager for macOS ([https://brew.sh](https://brew.sh))
+> 1. *[Download & Install]* Mac "Packages" app ([http://s.sudre.free.fr/Software/Packages/about.html](http://s.sudre.free.fr/Software/Packages/about.html))
+> 2. *[Download & Install]* Homebrew, The Missing Package Manager for macOS ([https://brew.sh](https://brew.sh))
 > 3. `brew install create-dmg` ([https://github.com/create-dmg/create-dmg](https://github.com/create-dmg/create-dmg))
 > 
 > 
@@ -126,7 +107,7 @@ Navigate the sections below for instructions on how to compile or run the Instal
 >
 </details>
 
-## GNU/Linux
+## GNU/Linux Scripts and Instructions
 **Any Distro that WINE supports**
 
 <details>
@@ -201,7 +182,7 @@ Navigate the sections below for instructions on how to compile or run the Instal
 >
 > **Step By Step**
 >
-> 1. Download/Install WINE.  (5.0 or higher has been tested)
+> 1. Download & Install WINE.  (5.0 or higher has been tested)
 >     - [https://www.winehq.org](https://www.winehq.org)
 > 
 > 2. Use winetricks to install the .NET runtime (4.0 minimum required, 4.5.2 also works, have not tested higher)
