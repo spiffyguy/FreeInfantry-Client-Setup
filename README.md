@@ -138,7 +138,7 @@ Setup/Installer source files for the Infantry Online game:
 > 
 > **Step By Step**
 >
-> 1. Download the "./Linux/play-on-linux-infantry-online.sh" Script from this repo
+> 1. Download the "./Linux/play-on-linux-infantry-online.sh" Script from this repo (Make sure to grab the RAW file if downloading through the browser)
 >
 > 2. Open PlayOnLinux
 >
@@ -162,16 +162,20 @@ Setup/Installer source files for the Infantry Online game:
 > 
 > **Step By Step**
 >
-> 1. Download the "./Linux/lutris-infantry-online.yaml" Script from this repo
+> 1. Download the "./Linux/lutris-infantry-online.yaml" Script from this repo (Make sure to grab the RAW file if downloading through the browser)
 >
 > 2. Open the Terminal
 >
 > 3. Enter the command `lutris -i lutris-infantry-online.yaml` and hit enter.  Lutris will open.
 >
 > 4. Click the "Install" button on the right.
->![Lutris Install Infantry Online Prompt](Linux/_screenshots/Lutris-Install-Infantry-Online-Prompt.png)
+> 
+>   ![Lutris Install Infantry Online Prompt](Linux/_screenshots/Lutris-Install-Infantry-Online-Prompt.png)
 >
-> 5. Follow the prompts and Infantry Online will be installed and ready to play!
+> 5. Follow the installer prompts.  Infantry Online installs to your Lutris game library and will be ready to play!
+> 
+>  ![Lutris Game Library](Linux/_screenshots/Lutris-Game-Library.png)
+>
 </details>
 
 <!--
@@ -183,18 +187,23 @@ Setup/Installer source files for the Infantry Online game:
 -->
 
 <details>
-  <summary>(TODO) Manual Install with PlayOnLinux (with Screenshots)</summary>
+  <summary>Generic Manual Installation (Rough Outline)</summary>
 
->
-> **Prerequisites**
-> 
-> - TODO
-> 
 >
 > **Step By Step**
 >
-> - TODO
->
+> 1. Download/Install WINE.  (5.0 or higher has been tested)
+>     - [https://www.winehq.org](https://www.winehq.org)
+> 2. Use winetricks to install the .NET runtime (4.0 minimum required, 4.5.2 also works, have not tested higher)
+>     - [https://wiki.winehq.org/Winetricks](https://wiki.winehq.org/Winetricks)
+>     - ie: `sh winetricks dotnet40`
+> 3. Download the official Infantry Online installer EXE and run it inside WINE
+>     - [https://www.freeinfantry.com/download/latest/Install-Infantry-Online.exe](https://www.freeinfantry.com/download/latest/Install-Infantry-Online.exe)
+>     - $ `wine path/to/downloads/Install-Infantry-Online.exe`
+> 4. Follow the prompts, mostly the defaults but be sure to choose "cnc-ddraw, opengl" instead of the default "cnc-ddraw, dx9" component.  (Both work for linux but you will get higher FPS with the opengl renderer.)
+> 5. After it's done, run the launcher with WINE
+>     - $ `wine path/to/drive_c/Program Files/InfantryLauncher.exe`
+> 6. You are now ready to play!
 </details>
 
 ## Thanks to all Contributors
