@@ -1,6 +1,6 @@
 # Date : (2022-02-20 14-00)
-# Last revision : (2022-02-22 09-00)
-# Wine version used : 5.0.0
+# Last revision : (2022-02-23 09-35)
+# Wine version used : 7.0.0
 # Distribution used to test : Ubuntu 20.04 LTS
 # Author : Spiff
 
@@ -18,7 +18,7 @@ script:
     working_dir: "$GAMEDIR/drive_c/Program Files/Infantry Online/"
   
   files:
-  - infantryinstaller: "http://freeinfantry.com/download/files/Install-Infantry-Online-v1.55.0-alpha.exe"
+  - infantryinstaller: "http://freeinfantry.com/download/win/latest/Install-Infantry-Online.exe"
 
   installer:
   - task:
