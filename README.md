@@ -2,7 +2,7 @@
 
 **Download the latest built, ready to play, Infantry Online client at: [http://freeinfantry.com](http://freeinfantry.com)**
 
-Navigate the sections below for instructions on how to compile or run the Installer source files for the Infantry Online game on each platform.
+Navigate the sections below for instructions on how to compile or run the Installer source files for Infantry Online on each platform.
 
 ## Windows
 **Windows XP or later (Yes, including Windows 11)**
@@ -147,7 +147,9 @@ Navigate the sections below for instructions on how to compile or run the Instal
 >
 > 4. Navigate to the downloaded "play-on-linux-infantry-online.sh" script.
 >
-> 5. Follow the prompts and Infantry Online will be installed and ready to play!
+> 5. Follow the installer prompts.  Infantry Online installs to your PlayOnLinux game library and will be ready to play!
+> 
+>  ![PlayOnLinux Game Library](Linux/_screenshots/POL-Game-Library.png)
 >
 </details>
 
