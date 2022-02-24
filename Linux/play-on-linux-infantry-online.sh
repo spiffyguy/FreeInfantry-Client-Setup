@@ -1,6 +1,6 @@
 #!/usr/bin/env playonlinux-bash
 # Date : (2022-02-17 07-00)
-# Last revision : (2022-02-23 09-35)
+# Last revision : (2022-02-24 06-21)
 # Wine version used : 5.0.0
 # Distribution used to test : Ubuntu 20.04 LTS
 # Author : Spiff
@@ -16,6 +16,9 @@ PREFIX="InfantryOnline"
 COMPANY="Free Infantry Group"
 DOMAIN="http://www.freeinfantry.com"
 TEMPTITLE="$TITLE"
+
+#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/infantryonline/top.jpg" "http://files.playonlinux.com/resources/setups/infantryonline/left.jpg" "$TITLE"
+POL_GetSetupImages "http://freeinfantry.com/download/installer-images/linux-pol-top-64x64.png" "http://freeinfantry.com/download/installer-images/linux-pol-left-150x356.jpg" "$TITLE"
 
 POL_SetupWindow_Init
 POL_Debug_Init
