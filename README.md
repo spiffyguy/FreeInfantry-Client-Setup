@@ -22,9 +22,9 @@ Navigate the sections below for instructions on how to compile or run the Instal
 >
 > 1. Clone/Download this Github Repo
 > 
-> 2. Move the Infantry Launcher files (InfantryLauncher.exe, default.ini, Newtonsoft.Json.dll & imgs folder) inside here: "./Windows/_builds/launcher/"
+> 2. Move the Infantry Launcher files (InfantryLauncher.exe, default.ini, Newtonsoft.Json.dll & imgs folder) inside here: `./Windows/_builds/launcher/`
 >
-> 3. Move the 4 cnc-ddraw files (ddraw.dll, ddraw.ini, cnc-ddraw config.exe & Shaders folder) inside here: "./Windows/_builds/cnc-ddraw/"
+> 3. Move the 4 cnc-ddraw files (ddraw.dll, ddraw.ini, cnc-ddraw config.exe & Shaders folder) inside here: `./Windows/_builds/cnc-ddraw/`
 >
 > 4. Open the NSIS Application
 >
@@ -32,9 +32,9 @@ Navigate the sections below for instructions on how to compile or run the Instal
 >
 > 6. Choose "File" -> "Load Script..."
 > 
-> 7. Navigate to the "./Windows/nsis-Infantry-Online.nsi" script and choose "Open"
+> 7. Navigate to the `./Windows/nsis-Infantry-Online.nsi` script and choose "Open"
 >
-> 8. It will automatically compile and (if no errors) will build the distributable installer .exe here: "./Windows/_builds/installer/"
+> 8. It will automatically compile and (if no errors) will build the distributable installer .exe here: `./Windows/_builds/installer/`
 >
 </details>
 
@@ -108,7 +108,7 @@ Navigate the sections below for instructions on how to compile or run the Instal
 >
 > 2. Place the built Wineskin wrapped Infantry Online.app here: "./Mac/_builds/app/Infantry Online.app"
 >
-> 3. Run the "./Mac/buildPackageDMG.sh" script in the terminal and it will build a .pkg installer file here: "./Mac/_builds/pkg/" and a distributable dmg file here: "./Mac/_builds/dmg/"
+> 3. Run the `./Mac/buildPackageDMG.sh` script in the terminal and it will build a .pkg installer file here: `./Mac/_builds/pkg/` and a distributable dmg file here: `./Mac/_builds/dmg/`
 >
 </details>
 
@@ -117,10 +117,12 @@ Navigate the sections below for instructions on how to compile or run the Instal
 
 >
 > 1. Open the **DMG Volume Icon** on your desktop
->![DMG Volume](Mac/_screenshots/DMGVolume.png)
+> 
+>    ![DMG Volume](Mac/_screenshots/DMGVolume.png)
 >
 > 2. Open the **.pkg** file by Control-Click and choosing "Open" in the contextual menu
->![DMG Installer Window](Mac/_screenshots/DMGInstallerWindow.png)
+> 
+>   ![DMG Installer Window](Mac/_screenshots/DMGInstallerWindow.png)
 >
 </details>
 
@@ -145,7 +147,12 @@ Navigate the sections below for instructions on how to compile or run the Instal
 > 3. Open the Tools menu and choose "Run a local script"
 >![PlayOnLinux Tools Run Local Script](Linux/_screenshots/POL_Tools-Menu_Run-Local-Script.png)
 >
-> 4. Navigate to the downloaded "play-on-linux-infantry-online.sh" script.
+> 4. Follow the PlayOnLinux "Run Local Script" prompts.
+>    - Browse to the downloaded "play-on-linux-infantry-online.sh" script when it asks.
+>    - Click "Next."
+>    - Look the script code over make sure it's the one that came from this repo.
+>    - Check "I Agree" to run this local script
+>    - Click "Next" again to get into the PlayOnLinux installer.
 >
 > 5. Follow the installer prompts.  Infantry Online installs to your PlayOnLinux game library and will be ready to play!
 > 
@@ -189,7 +196,7 @@ Navigate the sections below for instructions on how to compile or run the Instal
 -->
 
 <details>
-  <summary>Generic Manual Installation (Rough Outline)</summary>
+  <summary>Generic Manual Installation (Rough Outline, more of a Guide)</summary>
 
 >
 > **Step By Step**
@@ -207,7 +214,7 @@ Navigate the sections below for instructions on how to compile or run the Instal
 > 
 > 4. Follow the installer prompts, defaults are good until you get to the "components" screen.  Be sure to choose the "cnc-ddraw, opengl" checkbox instead of the default "cnc-ddraw, dx9" checkbox.  (Both work for linux but you will get higher FPS with the opengl renderer.)
 > 
-> 5. After it's done, run the launcher with WINE
+> 5. After it's done installing, run the InfantryLauncher.exe with WINE
 >     - $ `wine path/to/drive_c/Program Files/InfantryLauncher.exe`
 > 
 > 6. You are now ready to play!
