@@ -2,7 +2,7 @@
 
 **Download the latest built, ready to play, Infantry Online client at: [http://freeinfantry.com](http://freeinfantry.com)**
 
-Setup/Installer source files for the Infantry Online game:
+Navigate the sections below for instructions on how to compile or run the Installer source files for the Infantry Online game on each platform.
 
 ## Windows
 **Windows XP or later (Yes, including Windows 11)**
@@ -194,16 +194,22 @@ Setup/Installer source files for the Infantry Online game:
 >
 > 1. Download/Install WINE.  (5.0 or higher has been tested)
 >     - [https://www.winehq.org](https://www.winehq.org)
+> 
 > 2. Use winetricks to install the .NET runtime (4.0 minimum required, 4.5.2 also works, have not tested higher)
 >     - [https://wiki.winehq.org/Winetricks](https://wiki.winehq.org/Winetricks)
 >     - ie: `sh winetricks dotnet40`
+> 
 > 3. Download the official Infantry Online installer EXE and run it inside WINE
 >     - [http://www.freeinfantry.com/download/win/latest/Install-Infantry-Online.exe](http://www.freeinfantry.com/download/win/latest/Install-Infantry-Online.exe)
 >     - $ `wine path/to/downloads/Install-Infantry-Online.exe`
-> 4. Follow the prompts, mostly the defaults but be sure to choose "cnc-ddraw, opengl" instead of the default "cnc-ddraw, dx9" component.  (Both work for linux but you will get higher FPS with the opengl renderer.)
+> 
+> 4. Follow the installer prompts, defaults are good until you get to the "components" screen.  Be sure to choose the "cnc-ddraw, opengl" checkbox instead of the default "cnc-ddraw, dx9" checkbox.  (Both work for linux but you will get higher FPS with the opengl renderer.)
+> 
 > 5. After it's done, run the launcher with WINE
 >     - $ `wine path/to/drive_c/Program Files/InfantryLauncher.exe`
+> 
 > 6. You are now ready to play!
+> 
 </details>
 
 ## Thanks to all Contributors
