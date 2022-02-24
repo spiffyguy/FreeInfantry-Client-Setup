@@ -1,8 +1,9 @@
 # Date : (2022-02-20 14-00)
-# Last revision : (2022-02-23 09-35)
+# Last revision : (2022-02-24 06-21)
 # Wine version used : 7.0.0
 # Distribution used to test : Ubuntu 20.04 LTS
 # Author : Spiff
+# Reference : https://github.com/lutris/lutris/blob/master/docs/installers.rst
 
 name: "Infantry Online"
 game_slug: "infantry-online"
@@ -12,26 +13,36 @@ runner: "wine"
 
 script:
   game:
-    arch: "win32"
-    exe: "$GAMEDIR/drive_c/Program Files/Infantry Online/InfantryLauncher.exe"
-    prefix: "$GAMEDIR"
-    working_dir: "$GAMEDIR/drive_c/Program Files/Infantry Online/"
-  
+    arch: win32
+    exe: $GAMEDIR/drive_c/Program Files/Infantry Online/InfantryLauncher.exe
+    prefix: $GAMEDIR
+    working_dir: $GAMEDIR/drive_c/Program Files/Infantry Online/
+
   files:
-  - infantryinstaller: "http://freeinfantry.com/download/win/latest/Install-Infantry-Online.exe"
+  - infantryinstaller: http://freeinfantry.com/download/win/latest/Install-Infantry-Online.exe
+  - infantrybanner: http://freeinfantry.com/download/installer-images/linux-lutris-banner-184x69.jpg
 
   installer:
   - task:
-      app: "dotnet452"
+      app: dotnet452
       description: "Step (1/2) - Installing .NET 4.5.2..."
-      name: "winetricks"
-      prefix: "$GAMEDIR"
+      name: winetricks
+      prefix: $GAMEDIR
   - task:
-      description: "Step (2/2) - Installing Infantry Online."
-      executable: "infantryinstaller"
+      description: "Step (2/2) - Installing Infantry Online..."
+      executable: infantryinstaller
       args: "/ddraw=opengl /S"
-      name: "wineexec"
-      prefix: "$GAMEDIR"
+      name: wineexec
+      prefix: $GAMEDIR
+  - move:
+      src: infantrybanner
+      dst: $GAMEDIR/infantry-online.jpg
+  - execute:
+      command: mkdir -p ~/.local/share/lutris/banners
+      description: Create the banners folder if needed
+  - execute:
+      command: cp $GAMEDIR/infantry-online.jpg ~/.local/share/lutris/banners/
+      description: Move the banner to the lutris banner folder
   wine:
       dxvk: "false"
       vkd3d: "false"
