@@ -5,7 +5,7 @@
 Setup/Installer source files for the Infantry Online game:
 
 ## Windows
-**Windows XP or later**
+**Windows XP or later (Yes, including Windows 11)**
 
 <details>
   <summary>Building the "NSIS" Script Installer</summary>

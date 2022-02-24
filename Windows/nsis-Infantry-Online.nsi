@@ -135,8 +135,8 @@ ${EndIf}
 	#############
 	#	Registry - LAUNCHER
 	#############
- 	!insertmacro MaybeWriteRegStr "Software\HarmlessGames\Infantry\Launcher" "Path" "$INSTDIR" ${key_override}
- 	!insertmacro MaybeWriteRegStr "Software\HarmlessGames\Infantry\Launcher" "Version" "2.1.0.9" ${key_override}
+ 	WriteRegStr HKCU "Software\HarmlessGames\Infantry\Launcher" "Path" "$INSTDIR"
+ 	WriteRegStr HKCU "Software\HarmlessGames\Infantry\Launcher" "Version" "2.1.0.9"
 
 	#############
 	#	Registry - MISC
@@ -159,10 +159,16 @@ ${EndIf}
 	# (This loops 6 times.... ie: Profile5,Profile4,Profile3,Profile2,Profile1,Profile0)
 	${ForEach} $1 5 0 - 1
 		
+		#############
+		#	Registry - Profile Login
+		#############
  		!insertmacro MaybeWriteRegStr "Software\HarmlessGames\Infantry\Profile$1\Login" "Name" "" ${key_override}
  		!insertmacro MaybeWriteRegStr "Software\HarmlessGames\Infantry\Profile$1\Login" "ParentName" "" ${key_override}
  		!insertmacro MaybeWriteRegStr "Software\HarmlessGames\Infantry\Profile$1\Login" "ServerName" "" ${key_override}
 		
+		#############
+		#	Registry - Profile Chat
+		#############
  		!insertmacro MaybeWriteRegStr "Software\HarmlessGames\Infantry\Profile$1\Chat" "Channel0" "newbies" ${key_override}
  		!insertmacro MaybeWriteRegStr "Software\HarmlessGames\Infantry\Profile$1\Chat" "Channel1" "" ${key_override}
  		!insertmacro MaybeWriteRegStr "Software\HarmlessGames\Infantry\Profile$1\Chat" "Channel2" "" ${key_override}
@@ -173,11 +179,25 @@ ${EndIf}
  		!insertmacro MaybeWriteRegStr "Software\HarmlessGames\Infantry\Profile$1\Chat" "Channel7" "" ${key_override}
  		!insertmacro MaybeWriteRegStr "Software\HarmlessGames\Infantry\Profile$1\Chat" "Channel8" "" ${key_override}
 		
+		#############
+		#	Registry - Profile HiddenOptions
+		#############
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\HiddenOptions" "ZoomMax" 0x000003e8 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\HiddenOptions" "ZoomTime" 0x00000064 ${key_override}
 
+		#############
+		#	Registry - Profile Keyboard
+		#############
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "0" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "1" 0x00000000 ${key_override}
+ 		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "2" 0x015c0000 ${key_override}
+ 		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "3" 0x014c0000 ${key_override}
+ 		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "4" 0x00c40000 ${key_override}
+ 		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "5" 0x00c80000 ${key_override}
+ 		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "6" 0x01040000 ${key_override}
+ 		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "7" 0x01100000 ${key_override}
+ 		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "8" 0x0040ae00 ${key_override}
+ 		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "9" 0x0040a600 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "10" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "11" 0x00040000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "12" 0x00100000 ${key_override}
@@ -188,7 +208,6 @@ ${EndIf}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "17" 0x01480000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "18" 0x01180000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "19" 0x00800000 ${key_override}
- 		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "2" 0x015c0000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "20" 0x011c0000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "21" 0x01200000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "22" 0x00900000 ${key_override}
@@ -199,7 +218,6 @@ ${EndIf}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "27" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "28" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "29" 0x00000000 ${key_override}
- 		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "3" 0x014c0000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "30" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "31" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "32" 0x00480000 ${key_override}
@@ -210,7 +228,6 @@ ${EndIf}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "37" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "38" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "39" 0x00000000 ${key_override}
- 		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "4" 0x00c40000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "40" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "41" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "42" 0x00000000 ${key_override}
@@ -221,7 +238,6 @@ ${EndIf}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "47" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "48" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "49" 0x00000000 ${key_override}
- 		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "5" 0x00c80000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "50" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "51" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "52" 0x00000000 ${key_override}
@@ -232,7 +248,6 @@ ${EndIf}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "57" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "58" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "59" 0x00000000 ${key_override}
- 		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "6" 0x01040000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "60" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "61" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "62" 0x00000000 ${key_override}
@@ -243,10 +258,6 @@ ${EndIf}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "67" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "68" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "69" 0x00000000 ${key_override}
- 		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "7" 0x01100000 ${key_override}
- 		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "8" 0x0040ae00 ${key_override}
- 		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "9" 0x0040a600 ${key_override}
- 		
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "AxisDeadzone" 0x00001f40 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "AxisRotate" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "AxisStrafe" 0x00000000 ${key_override}
@@ -257,9 +268,11 @@ ${EndIf}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "MouseMiddle" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "MouseRight" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "MovementMode" 0x00000003 ${key_override}
-
  		!insertmacro MaybeWriteRegStr "Software\HarmlessGames\Infantry\Profile$1\Keyboard" "ReservedFirstLetters" "~ `+-" ${key_override}
 
+		#############
+		#	Registry - Profile Message
+		#############
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Message" "Alarm" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Message" "Entering" 0x00000001 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Message" "FilterChat" 0x00000000 ${key_override}
@@ -276,6 +289,9 @@ ${EndIf}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Message" "Leaving" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Message" "NameWidth" 0x00000054 ${key_override}
 
+		#############
+		#	Registry - Profile Options
+		#############
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "AdjustSoundDelay" 0x00000005 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "AlternateClock" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "AutoLogMessages" 0x00000000 ${key_override}
@@ -313,10 +329,8 @@ ${EndIf}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "RotateRampTime" 0x00000019 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "RotationCount" 0x00000040 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "RotationSounds" 0x00000001 ${key_override}
- 		
  		!insertmacro MaybeWriteRegStr "Software\HarmlessGames\Infantry\Profile$1\Options" "SDirectoryAddress" "infdir1.aaerox.com" ${key_override}
  		!insertmacro MaybeWriteRegStr "Software\HarmlessGames\Infantry\Profile$1\Options" "SDirectoryAddressBackup" "infdir2.aaerox.com" ${key_override}
-
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "ShowAimingTick" 0x00000001 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "ShowBallTrails" 0x000001f4 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "ShowBanners" 0x00000001 ${key_override}
@@ -338,10 +352,8 @@ ${EndIf}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "SkipSplash" 0x00000001 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "Sound3d" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "SoundVolume" 0x0000000a ${key_override}
- 		
  		!insertmacro MaybeWriteRegStr "Software\HarmlessGames\Infantry\Profile$1\Options" "Squad" "" ${key_override}
  		!insertmacro MaybeWriteRegStr "Software\HarmlessGames\Infantry\Profile$1\Options" "SquadPassword" "" ${key_override}
- 		
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "ThrustSounds" 0x00000001 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "TipOfDay" 0x00000001 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "TipOfDayPosition" 0x0000000c ${key_override}
