@@ -15,7 +15,7 @@ Navigate the sections below for instructions on how to compile or run the Instal
 > 
 > 1. *[Download & Install]* NSIS, Nullsoft Scriptable Install System ([https://nsis.sourceforge.io](https://nsis.sourceforge.io))
 > 2. *[Download]* Built InfantryLauncher.exe & it's required files ([https://github.com/InfantryOnline/Infantry-Online-Server](https://github.com/InfantryOnline/Infantry-Online-Server))
-> 3. *[Download]* cnc-ddraw ([https://github.com/CnCNet/cnc-ddraw](https://github.com/CnCNet/cnc-ddraw))
+> 3. *[Download]* cnc-ddraw ([https://github.com/CnCNet/cnc-ddraw](https://github.com/CnCNet/cnc-ddraw), Minimum version: 4.4.7.0)
 > 
 >
 > **Step By Step**
@@ -63,7 +63,7 @@ Navigate the sections below for instructions on how to compile or run the Instal
 > **Prerequisites**
 > 
 > 1. *[Download & Install]* Wineskin Wrapper ([https://github.com/Gcenx/WineskinServer](https://github.com/Gcenx/WineskinServer))
-> 2. *[Download]* cnc-ddraw ([https://github.com/CnCNet/cnc-ddraw](https://github.com/CnCNet/cnc-ddraw))
+> 2. *[Download]* cnc-ddraw ([https://github.com/CnCNet/cnc-ddraw](https://github.com/CnCNet/cnc-ddraw), Minimum version: 4.4.7.0)
 > 
 >
 > **Step By Step**
