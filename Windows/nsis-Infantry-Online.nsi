@@ -1,6 +1,6 @@
 # Author : Spiff
 # Date : (2022-02-21 09-00)
-# Last revision : (2022-02-24 06-21)
+# Last revision : (2022-02-28 04-10)
 
 !define APPNAME "Infantry Online"
 !define COMPANYNAME "Free Infantry Group"
@@ -11,7 +11,7 @@
 !define VERSIONBUILD 0
 
 !define HELPURL "https://discord.gg/2avPSyv" # "Support Information" link
-!define UPDATEURL "http://www.freeinfantry.com" # "Product Updates" link
+!define UPDATEURL "http://www.freeinfantry.com/download/" # "Product Updates" link
 !define ABOUTURL "http://www.freeinfantry.com" # "Publisher" link
 
 #TODO: need to confirm this size...
@@ -317,8 +317,6 @@ ${EndIf}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "RenderBackground" 0x00000001 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "RenderParallax" 0x00000001 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "RenderStarfield" 0x00000001 ${key_override}
- 		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "ResolutionX" $screenResolutionWidth ${key_override}
- 		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "ResolutionY" $screenResolutionHeight ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "RollMode" 0x00000000 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "RotateRampTime" 0x00000019 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "RotationCount" 0x00000040 ${key_override}
@@ -362,6 +360,10 @@ ${EndIf}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "ViewSpeed" 0x00000005 ${key_override}
  		!insertmacro MaybeWriteRegDWORD "Software\HarmlessGames\Infantry\Profile$1\Options" "ZoneSpecificMacros" 0x00000000 ${key_override}
 
+ 		# Set the resolution of Infantry to the current monitor resolution.
+ 		WriteRegDWORD HKCU "Software\HarmlessGames\Infantry\Profile$1\Options" "ResolutionX" $screenResolutionWidth
+ 		WriteRegDWORD HKCU "Software\HarmlessGames\Infantry\Profile$1\Options" "ResolutionY" $screenResolutionHeight
+
 	${Next}
 
 !macroend
@@ -380,6 +382,9 @@ ${EndIf}
 	
 	WriteINIStr $INSTDIR\ddraw.ini ddraw infantryhack true
 	WriteINIStr $INSTDIR\ddraw.ini ddraw renderer "${renderername}"
+	
+	# Set DDraw override for WINE in the registry. (Registry Key ignored on actual Windows)
+	WriteRegStr HKCU "Software\Wine\DllOverrides" "ddraw" "native,builtin"
 
 !macroend
 
@@ -507,7 +512,7 @@ Function .onInit
 	SectionSetFlags ${Seccncddraw-opengl} $0
 	
 	# Look at the ddraw override command line....
-	# TODO: allow gdi as well
+	# TODO: allow gdi as a choice as well
 	${IF} $defaultCncddrawRenderer == "opengl"
 		StrCpy $R9 ${Seccncddraw-opengl}
 		SectionGetFlags ${Seccncddraw-opengl} $0
