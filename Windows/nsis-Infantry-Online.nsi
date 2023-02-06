@@ -1,6 +1,9 @@
 # Author : Spiff
 # Date : (2022-02-21 09-00)
-# Last revision : (2022-02-28 04-10)
+# Last revision : (2023-02-05 20-26)
+
+!define USENEWLAUNCHER false
+Var ASSETDIR
 
 !define APPNAME "Infantry Online"
 !define COMPANYNAME "Free Infantry Group"
@@ -369,9 +372,13 @@ ${EndIf}
 !macroend
 
 !macro editandinstallcncddraw renderername
-
-	SetOutPath "$INSTDIR"
-  
+	
+	${IF} ${USENEWLAUNCHER} == true
+		SetOutPath "$ASSETDIR"
+	${Else}
+		setOutPath $INSTDIR
+	${ENDIF}
+	
 	#############
 	#	Files - CNC-DDraw
 	#############
@@ -380,8 +387,9 @@ ${EndIf}
 	File "_builds\cnc-ddraw\cnc-ddraw config.exe"
 	File /r "_builds\cnc-ddraw\Shaders"
 	
-	WriteINIStr $INSTDIR\ddraw.ini ddraw infantryhack true
-	WriteINIStr $INSTDIR\ddraw.ini ddraw renderer "${renderername}"
+	# Set the Infantry Online Specific Hacks for cnc-ddraw
+	WriteINIStr $ASSETDIR\ddraw.ini ddraw infantryhack true
+	WriteINIStr $ASSETDIR\ddraw.ini ddraw renderer "${renderername}"
 	
 	# Set DDraw override for WINE in the registry. (Registry Key ignored on actual Windows)
 	WriteRegStr HKCU "Software\Wine\DllOverrides" "ddraw" "native,builtin"
@@ -396,12 +404,17 @@ Section "${APPNAME}" Seclauncher
 	#	Main Infantry Launcher
 	#############
 	File "_builds\launcher\InfantryLauncher.exe"
-	File "_builds\launcher\Newtonsoft.Json.dll"
-	File "_builds\launcher\default.ini"
-	File /r "_builds\launcher\imgs"
-
-	# Give InfantryLauncher.exe admin rights.
- 	WriteRegStr HKLM "SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" "$INSTDIR\InfantryLauncher.exeM.exe" "RUNASADMIN"
+	${IF} ${USENEWLAUNCHER} == true
+		CreateDirectory "$ASSETDIR"
+		CreateShortcut "$INSTDIR\Assets.lnk" "$ASSETDIR"
+	 	WriteRegStr HKCU "Software\HarmlessGames\Infantry\Launcher" "AssetsPath" "$ASSETDIR"
+	${Else}
+		File "_builds\launcher\Newtonsoft.Json.dll"
+		File "_builds\launcher\default.ini"
+		File /r "_builds\launcher\imgs"
+		# Give InfantryLauncher.exe admin rights.
+	 	WriteRegStr HKEY_LOCAL_MACHINE "SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" "$INSTDIR\InfantryLauncher.exeM.exe" "RUNASADMIN"
+	${ENDIF}
  
  	# Start Menu
 	${IFNOT} $StartMenuFolder == ""
@@ -416,7 +429,11 @@ Section "${APPNAME}" Seclauncher
 	#	Registry - LAUNCHER
 	#############
  	WriteRegStr HKCU "Software\HarmlessGames\Infantry\Launcher" "Path" "$INSTDIR"
- 	WriteRegStr HKCU "Software\HarmlessGames\Infantry\Launcher" "Version" "2.1.0.9"
+	${IF} ${USENEWLAUNCHER} == true
+	 	WriteRegStr HKCU "Software\HarmlessGames\Infantry\Launcher" "Version" "1.0" # New Launcher...
+	${Else}
+	 	WriteRegStr HKCU "Software\HarmlessGames\Infantry\Launcher" "Version" "2.2.0.0" # TODO: get from default.ini file
+	${ENDIF}
 	
  	#############
 	#	Uninstaller
@@ -483,6 +500,11 @@ SectionGroupEnd
 Function .onInit
 	setShellVarContext all
 	StrCpy $INSTDIR "$PROGRAMFILES\${APPNAME}"
+	StrCpy $ASSETDIR "$INSTDIR"
+	${IF} ${USENEWLAUNCHER} == true
+		StrCpy $ASSETDIR "$LocalAppData\${APPNAME}"
+		#MessageBox MB_OK "$ASSETDIR"
+	${ENDIF}
 	!insertmacro VerifyUserIsAdmin
 	
 	System::Call 'user32::GetSystemMetrics(i 0) i .r0'
@@ -609,9 +631,18 @@ Section "Uninstall"
  
 	# Try to remove the install directory
 	rmDir /r $INSTDIR
- 
+	
+	${IF} ${USENEWLAUNCHER} == true
+		# Try to remove the assets directory
+		rmDir /r $ASSETDIR
+	${ENDIF}
+	
 	# TODO: Remove windows registry items?
  
 	# Remove uninstaller information from the registry
 	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}"
 sectionEnd
+
+# SIGNING - TODO
+#!finalize '.\_assets\signing\sign.bat "%1" "${APPNAME} Installer" ${ABOUTURL}'
+#!uninstfinalize '.\_assets\signing\sign.bat "%1" "${APPNAME} Uninstaller" ${ABOUTURL}'
