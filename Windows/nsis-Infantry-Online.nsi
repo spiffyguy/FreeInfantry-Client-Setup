@@ -1,11 +1,11 @@
 # Author : Spiff
 # Date : (2022-02-21 09-00)
-# Last revision : (2023-02-05 20-26)
+# Last revision : (2024-02-11 06-09)
 
 !define USENEWLAUNCHER false
 Var ASSETDIR
 
-!define APPNAME "Infantry Online"
+!define APPNAME "FreeInfantry"
 !define COMPANYNAME "Free Infantry Group"
 !define DESCRIPTION "Infantry is an online-only multiplayer action game with a science fiction theme. Players can spectate or join one of multiple game types running simultaneously, and communicate through an in-game chat window."
 
@@ -66,8 +66,8 @@ Var /GLOBAL StartMenuFolder
 
 # TODO: need to figure out how to make this work AND how to fix the font color...
 #!define MUI_FINISHPAGE_SHOWREADME ""
-#!define MUI_FINISHPAGE_SHOWREADME_TEXT "Start Infantry Online"
-#!define MUI_FINISHPAGE_SHOWREADME_FUNCTION StartInfantryOnline
+#!define MUI_FINISHPAGE_SHOWREADME_TEXT "Start FreeInfantry"
+#!define MUI_FINISHPAGE_SHOWREADME_FUNCTION StartFreeInfantry
 !insertmacro MUI_PAGE_FINISH
 
 !insertmacro MUI_UNPAGE_WELCOME
@@ -81,7 +81,7 @@ Var /GLOBAL StartMenuFolder
 
 # FUNCTIONS
 
-#Function StartInfantryOnline
+#Function StartFreeInfantry
 	# TODO: launch the app after close...
 #FunctionEnd
 
@@ -387,7 +387,7 @@ ${EndIf}
 	File "_builds\cnc-ddraw\cnc-ddraw config.exe"
 	File /r "_builds\cnc-ddraw\Shaders"
 	
-	# Set the Infantry Online Specific Hacks for cnc-ddraw
+	# Set the FreeInfantry Specific Hacks for cnc-ddraw
 	WriteINIStr $ASSETDIR\ddraw.ini ddraw infantryhack true
 	WriteINIStr $ASSETDIR\ddraw.ini ddraw renderer "${renderername}"
 	
@@ -440,12 +440,12 @@ Section "${APPNAME}" Seclauncher
 	#############
 
 	# Uninstaller - See function un.onInit and section "uninstall" for configuration
-	writeUninstaller "$INSTDIR\Uninstall Infantry Online.exe"
+	writeUninstaller "$INSTDIR\Uninstall FreeInfantry.exe"
  	
 	# Registry information for add/remove programs
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "DisplayName" "${APPNAME}"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "UninstallString" "$\"$INSTDIR\Uninstall Infantry Online.exe$\""
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "QuietUninstallString" "$\"$INSTDIR\Uninstall Infantry Online.exe$\" /S"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "UninstallString" "$\"$INSTDIR\Uninstall FreeInfantry.exe$\""
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "QuietUninstallString" "$\"$INSTDIR\Uninstall FreeInfantry.exe$\" /S"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "InstallLocation" "$\"$INSTDIR$\""
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "DisplayIcon" "$\"$INSTDIR\imgs\infantry.ico$\""
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "Publisher" "$\"${COMPANYNAME}$\""
@@ -584,10 +584,10 @@ FunctionEnd
 # Descriptions
 
   # Language strings
-  LangString DESC_Seclauncher ${LANG_ENGLISH} "Official Infantry Online Launcher.$\r$\n$\r$\nBrought to you by ${COMPANYNAME}."
+  LangString DESC_Seclauncher ${LANG_ENGLISH} "Official FreeInfantry Launcher.$\r$\n$\r$\nBrought to you by ${COMPANYNAME}."
   LangString DESC_Seccncddraw-auto ${LANG_ENGLISH} "cnc-ddraw Library, Fixes fullscreen and improves FPS.$\r$\n$\r$\nDirect3d9 Renderer. (best for Windows)"
   LangString DESC_Seccncddraw-opengl ${LANG_ENGLISH} "cnc-ddraw Library, Fixes fullscreen and improves FPS.$\r$\n$\r$\nOpenGL Renderer. (best for Mac/Linux)"
-  LangString DESC_Secfixregistry ${LANG_ENGLISH} "Reset Infantry Online Registry settings to their default values.$\r$\n$\r$\nThis would reset keyboard/mouse settings and aliases.$\r$\n$\r$\nCANNOT UNDO."
+  LangString DESC_Secfixregistry ${LANG_ENGLISH} "Reset FreeInfantry Registry settings to their default values.$\r$\n$\r$\nThis would reset keyboard/mouse settings and aliases.$\r$\n$\r$\nCANNOT UNDO."
   LangString DESC_Secclearsavedlogin ${LANG_ENGLISH} "Clear saved login credentials.$\r$\n$\r$\nThis would clear the saved username/password in the launcher.$\r$\n$\r$\nCANNOT UNDO."
 
   # Assign language strings to sections
@@ -627,7 +627,7 @@ Section "Uninstall"
 	#delete $INSTDIR\logo.ico
  
 	# Always delete uninstaller as the last action
-	delete "$INSTDIR\Uninstall Infantry Online.exe"
+	delete "$INSTDIR\Uninstall FreeInfantry.exe"
  
 	# Try to remove the install directory
 	rmDir /r $INSTDIR
