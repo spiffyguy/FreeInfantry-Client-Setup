@@ -1,6 +1,6 @@
 #!/bin/sh
 
-APP_NAME="Infantry Online"
+APP_NAME="FreeInfantry"
 APP_LOCATION="./_builds/app/${APP_NAME}.app"
 
 SKIP_PKG=false
@@ -13,7 +13,7 @@ cd $WORKINGDIR
 if [ -d "${APP_LOCATION}" ]; then
 	APP_VERSION=$(plutil -extract CFBundleShortVersionString raw -o - "${APP_LOCATION}/Contents/Info.plist")
 	#OVERRIDE PACKAGING VISIBLE VERSION?
-	#APP_VERSION="1.55b"
+	#APP_VERSION="1.56a"
 	
 	APP_NAMEVERSION_NOSPACES="${APP_NAME//[[:blank:]]/}_${APP_VERSION//[[:blank:]]/}"
 	
