@@ -1,8 +1,15 @@
 # Author : Spiff
 # Date : (2022-02-21 09-00)
-# Last revision : (2024-02-11 06-09)
+# Last revision : (2024-02-11 08-38)
 
-!define USENEWLAUNCHER false
+!define /date MyTIMESTAMP "%Y-%m-%d-%H-%M-%S"
+
+# TODO: this is too slow for compressing and installing...
+#SetCompressor /SOLID lzma
+#SetCompressorDictSize 64
+#SetDatablockOptimize ON
+
+!define USENEWASSETSFOLDER true
 Var ASSETDIR
 
 !define APPNAME "FreeInfantry"
@@ -25,13 +32,12 @@ Var ASSETDIR
 !define MUI_HEADERIMAGE_BITMAP "_assets\images\nsis-header-150x57.bmp"
 !define MUI_ABORTWARNING
 !define MUI_BGCOLOR 000000
-!define MUI_TEXTCOLOR ffffff
+!define MUI_TEXTCOLOR FFFFFF
 #!define MUI_LICENSEPAGE_BGCOLOR 000000
 #!define MUI_DIRECTORYPAGE_BGCOLOR 000000
 #!define MUI_STARTMENUPAGE_BGCOLOR 000000
 #!define MUI_INSTFILESPAGE_COLORS 123456
 #!define MUI_INSTFILESPAGE_PROGRESSBAR colored
-!define MUI_FINISHPAGE_LINK_COLOR ffffff
 
 !include "MUI2.nsh"
 !include FileFunc.nsh
@@ -39,13 +45,22 @@ Var ASSETDIR
 Unicode True
 
 RequestExecutionLevel admin ;Require admin rights on NT6+ (When UAC is turned on)
+!addplugindir "_assets\nsis-plugins"
 
 InstallDir "$PROGRAMFILES\${APPNAME}"
 # Get installation folder from registry if available
 InstallDirRegKey HKCU "Software\HarmlessGames\Infantry\Launcher" "Path"
 
 Name "${APPNAME}"
-outFile "_builds\installer\Install-Infantry-Online.exe"
+!if ${INSTALLINITIALASSETS} == true
+	!if ${NOLAUNCHERUPDATES} == true
+		OutFile "_builds\installer\Install-FreeInfantry-NoAutoUpdate-${MyTIMESTAMP}.exe"
+	!else
+		OutFile "_builds\installer\Install-FreeInfantry-${MyTIMESTAMP}.exe"
+	!endif
+!else
+	OutFile "_builds\installer\Install-FreeInfantry-Lite-${MyTIMESTAMP}.exe"
+!endif
 
 !define MUI_ICON "_assets\images\floppy.ico" 
 !define MUI_UNICON "_assets\images\floppy.ico"
@@ -65,9 +80,13 @@ Var /GLOBAL StartMenuFolder
 !insertmacro MUI_PAGE_INSTFILES
 
 # TODO: need to figure out how to make this work AND how to fix the font color...
-#!define MUI_FINISHPAGE_SHOWREADME ""
-#!define MUI_FINISHPAGE_SHOWREADME_TEXT "Start FreeInfantry"
-#!define MUI_FINISHPAGE_SHOWREADME_FUNCTION StartFreeInfantry
+!define MUI_FINISHPAGE_RUN
+!define MUI_FINISHPAGE_RUN_TEXT "Play FreeInfantry Now"
+!define MUI_FINISHPAGE_RUN_FUNCTION "RunFreeInfantry"
+!define MUI_FINISHPAGE_LINK "https://freeinfantry.com"
+!define MUI_FINISHPAGE_LINK_LOCATION "https://freeinfantry.com"
+!define MUI_FINISHPAGE_LINK_COLOR FFFFFF
+!define MUI_PAGE_CUSTOMFUNCTION_SHOW finish_show_function ; fix issue with run checkbox text same color as BG
 !insertmacro MUI_PAGE_FINISH
 
 !insertmacro MUI_UNPAGE_WELCOME
@@ -81,9 +100,13 @@ Var /GLOBAL StartMenuFolder
 
 # FUNCTIONS
 
-#Function StartFreeInfantry
-	# TODO: launch the app after close...
-#FunctionEnd
+Function finish_show_function
+	SetCtlColors $mui.FinishPage.Run 0xFFFFFF 0x666666 ; fix issue with run checkbox text same color as BG
+Functionend
+
+Function RunFreeInfantry
+  ExecShell "" "$ASSETDIR\InfantryLauncher.exe"
+FunctionEnd
 
 # MACROS
 
@@ -373,11 +396,7 @@ ${EndIf}
 
 !macro editandinstallcncddraw renderername
 	
-	${IF} ${USENEWLAUNCHER} == true
-		SetOutPath "$ASSETDIR"
-	${Else}
-		setOutPath $INSTDIR
-	${ENDIF}
+	SetOutPath "$ASSETDIR"
 	
 	#############
 	#	Files - CNC-DDraw
@@ -398,22 +417,39 @@ ${EndIf}
 
 Section "${APPNAME}" Seclauncher
 
-	setOutPath $INSTDIR
+	CreateDirectory "$INSTDIR"
+	SetOutPath "$ASSETDIR"
 
 	#############
 	#	Main Infantry Launcher
 	#############
-	File "_builds\launcher\InfantryLauncher.exe"
-	${IF} ${USENEWLAUNCHER} == true
+	!if ${NOLAUNCHERUPDATES} == true
+		File "_builds\launcher\InfantryLauncherNoAutoUpdate\InfantryLauncher.exe"
+	!else
+		File "_builds\launcher\InfantryLauncher.exe"
+	!endif
+	
+	!define MUI_FINISHPAGE_RUN "$ASSETDIR\InfantryLauncher.exe"
+	
+	File "_builds\launcher\Newtonsoft.Json.dll"
+	File "_builds\launcher\default.ini"
+	File /r /x .DS_Store "_builds\launcher\imgs"
+ 
+	!if ${INSTALLINITIALASSETS} == true
+		File /r /x .DS_Store "_builds\game-initial-assets\*.*"
+	!endif
+ 
+	#File /r /x .DS_Store "_builds\game-editors\Infantry Editors\*.*"
+	#File /r /x .DS_Store "_builds\game-editors\Misc"
+
+	${IF} ${USENEWASSETSFOLDER} == true
 		CreateDirectory "$ASSETDIR"
-		CreateShortcut "$INSTDIR\Assets.lnk" "$ASSETDIR"
+		AccessControl::SetOnFile "$ASSETDIR" "Everyone" "FullAccess"
+		IfFileExists $INSTDIR\Assets FoundAssetsSubFolder
+	    	CreateShortcut "$INSTDIR\Assets.lnk" "$ASSETDIR"
+			FoundAssetsSubFolder:
+		CreateShortcut "$INSTDIR\${APPNAME}.lnk" "$ASSETDIR\InfantryLauncher.exe"
 	 	WriteRegStr HKCU "Software\HarmlessGames\Infantry\Launcher" "AssetsPath" "$ASSETDIR"
-	${Else}
-		File "_builds\launcher\Newtonsoft.Json.dll"
-		File "_builds\launcher\default.ini"
-		File /r "_builds\launcher\imgs"
-		# Give InfantryLauncher.exe admin rights.
-	 	WriteRegStr HKEY_LOCAL_MACHINE "SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" "$INSTDIR\InfantryLauncher.exeM.exe" "RUNASADMIN"
 	${ENDIF}
  
  	# Start Menu
@@ -421,19 +457,19 @@ Section "${APPNAME}" Seclauncher
 	 	StrCpy $0 $StartMenuFolder 1
 		${IFNOT} $0 == ">"
 			CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
-			CreateShortCut "$SMPROGRAMS\$StartMenuFolder\${APPNAME}.lnk" "$INSTDIR\InfantryLauncher.exe" "" "$INSTDIR\imgs\infantry.ico"
+			CreateShortCut "$SMPROGRAMS\$StartMenuFolder\${APPNAME}.lnk" "$ASSETDIR\InfantryLauncher.exe" "" "$ASSETDIR\imgs\infantry.ico"
 		${ENDIF}
 	${ENDIF}
 	
 	#############
 	#	Registry - LAUNCHER
 	#############
- 	WriteRegStr HKCU "Software\HarmlessGames\Infantry\Launcher" "Path" "$INSTDIR"
-	${IF} ${USENEWLAUNCHER} == true
-	 	WriteRegStr HKCU "Software\HarmlessGames\Infantry\Launcher" "Version" "1.0" # New Launcher...
-	${Else}
+ 	WriteRegStr HKCU "Software\HarmlessGames\Infantry\Launcher" "Path" "$ASSETDIR"
+	#${IF} ${USENEWASSETSFOLDER} == true
+	# 	WriteRegStr HKCU "Software\HarmlessGames\Infantry\Launcher" "Version" "1.0" # New Launcher...
+	#${Else}
 	 	WriteRegStr HKCU "Software\HarmlessGames\Infantry\Launcher" "Version" "2.2.0.0" # TODO: get from default.ini file
-	${ENDIF}
+	#${ENDIF}
 	
  	#############
 	#	Uninstaller
@@ -447,7 +483,7 @@ Section "${APPNAME}" Seclauncher
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "UninstallString" "$\"$INSTDIR\Uninstall FreeInfantry.exe$\""
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "QuietUninstallString" "$\"$INSTDIR\Uninstall FreeInfantry.exe$\" /S"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "InstallLocation" "$\"$INSTDIR$\""
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "DisplayIcon" "$\"$INSTDIR\imgs\infantry.ico$\""
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "DisplayIcon" "$\"$ASSETDIR\imgs\infantry.ico$\""
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "Publisher" "$\"${COMPANYNAME}$\""
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "HelpLink" "$\"${HELPURL}$\""
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} - ${APPNAME}" "URLUpdateInfo" "$\"${UPDATEURL}$\""
@@ -483,10 +519,10 @@ SectionGroup "Reset/Clear"
 	
 	Section /o "Saved Login" Secclearsavedlogin
 		
-		IfFileExists "$INSTDIR\settings.ini" file_found file_not_found
+		IfFileExists "$ASSETDIR\settings.ini" file_found file_not_found
 		file_found:
-			WriteINIStr $INSTDIR\settings.ini Credentials Username ""
-			WriteINIStr $INSTDIR\settings.ini Credentials Password ""
+			WriteINIStr $ASSETDIR\settings.ini Credentials Username ""
+			WriteINIStr $ASSETDIR\settings.ini Credentials Password ""
 
 			goto end_of_test
 		file_not_found:
@@ -499,12 +535,10 @@ SectionGroupEnd
 
 Function .onInit
 	setShellVarContext all
+		
 	StrCpy $INSTDIR "$PROGRAMFILES\${APPNAME}"
-	StrCpy $ASSETDIR "$INSTDIR"
-	${IF} ${USENEWLAUNCHER} == true
-		StrCpy $ASSETDIR "$LocalAppData\${APPNAME}"
-		#MessageBox MB_OK "$ASSETDIR"
-	${ENDIF}
+	# StrCpy $ASSETDIR "$INSTDIR\Assets"
+
 	!insertmacro VerifyUserIsAdmin
 	
 	System::Call 'user32::GetSystemMetrics(i 0) i .r0'
@@ -547,6 +581,14 @@ Function .onInit
 	
 	Pop $0
 	
+FunctionEnd
+
+Function .onVerifyInstDir
+	StrCmp $INSTDIR "$PROGRAMFILES\${APPNAME}" 0 +3
+		StrCpy $ASSETDIR "$LOCALAPPDATA\${APPNAME}"
+		Goto PathIsGood
+		StrCpy $ASSETDIR "$INSTDIR\Assets"
+	PathIsGood:
 FunctionEnd
 
 Function .onSelChange
@@ -626,16 +668,16 @@ Section "Uninstall"
 	#delete $INSTDIR\app.exe
 	#delete $INSTDIR\logo.ico
  
+ 	${IF} ${USENEWASSETSFOLDER} == true
+		# Try to remove the assets directory
+		rmDir /r $ASSETDIR
+	${ENDIF}
+ 
 	# Always delete uninstaller as the last action
 	delete "$INSTDIR\Uninstall FreeInfantry.exe"
  
 	# Try to remove the install directory
 	rmDir /r $INSTDIR
-	
-	${IF} ${USENEWLAUNCHER} == true
-		# Try to remove the assets directory
-		rmDir /r $ASSETDIR
-	${ENDIF}
 	
 	# TODO: Remove windows registry items?
  
