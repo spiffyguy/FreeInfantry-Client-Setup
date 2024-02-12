@@ -1,6 +1,6 @@
 #!/usr/bin/env playonlinux-bash
 # Date : (2022-02-17 07-00)
-# Last revision : (2022-03-02 05-15)
+# Last revision : (2024-02-12 06-21)
 # Wine version used : 7.0
 # Distribution used to test : Ubuntu 20.04 LTS
 # Author : Spiff
@@ -11,14 +11,14 @@
 [ "$PLAYONLINUX" = "" ] && exit 0
 source "$PLAYONLINUX/lib/sources"
 
-TITLE="Infantry Online"
-PREFIX="InfantryOnline"
+TITLE="FreeInfantry"
+PREFIX="FreeInfantry"
 COMPANY="Free Infantry Group"
-DOMAIN="http://www.freeinfantry.com"
+DOMAIN="https://www.freeinfantry.com"
 TEMPTITLE="$TITLE"
 WINEVERSION="7.0"
 
-#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/infantryonline/top.jpg" "http://files.playonlinux.com/resources/setups/infantryonline/left.jpg" "$TITLE"
+#POL_GetSetupImages "http://files.playonlinux.com/resources/setups/freeinfantry/top.jpg" "http://files.playonlinux.com/resources/setups/freeinfantry/left.jpg" "$TITLE"
 POL_GetSetupImages "http://freeinfantry.com/download/installer-images/linux-pol-top-64x64.png" "http://freeinfantry.com/download/installer-images/linux-pol-left-150x356.jpg" "$TITLE"
 
 POL_SetupWindow_Init
@@ -44,8 +44,8 @@ then
 
 	POL_SetupWindow_wait "Downloading installer into a temp directory..." "$TITLE"
 	cd "$POL_System_TmpDir"
-	POL_Download "http://freeinfantry.com/download/win/latest/Install-Infantry-Online.exe"
-	INSTALLER="$POL_System_TmpDir/Install-Infantry-Online.exe"
+	POL_Download "http://freeinfantry.com/download/win/latest/Install-FreeInfantry.exe"
+	INSTALLER="$POL_System_TmpDir/Install-FreeInfantry.exe"
 	
 fi
 
@@ -60,7 +60,7 @@ else
 	TITLE="$TEMPTITLE (Step 2/2)"
 fi
 
-POL_SetupWindow_wait "Installing Infantry Online..." "$TITLE"
+POL_SetupWindow_wait "Installing FreeInfantry..." "$TITLE"
 
 TITLE="$TEMPTITLE"
 

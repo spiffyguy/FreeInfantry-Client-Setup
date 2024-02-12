@@ -1,25 +1,25 @@
 # Date : (2022-02-20 14-00)
-# Last revision : (2022-02-24 06-21)
+# Last revision : (2024-02-12 06-19)
 # Wine version used : 7.0.0
 # Distribution used to test : Ubuntu 20.04 LTS
 # Author : Spiff
 # Reference : https://github.com/lutris/lutris/blob/master/docs/installers.rst
 
-name: "Infantry Online"
-game_slug: "infantry-online"
+name: "FreeInfantry"
+game_slug: "freeinfantry"
 version: "Installer"
-slug: "infantry-online-installer"
+slug: "freeinfantry-installer"
 runner: "wine"
 
 script:
   game:
     arch: win32
-    exe: $GAMEDIR/drive_c/Program Files/Infantry Online/InfantryLauncher.exe
+    exe: $GAMEDIR/drive_c/ProgramData/FreeInfantry/InfantryLauncher.exe
     prefix: $GAMEDIR
-    working_dir: $GAMEDIR/drive_c/Program Files/Infantry Online/
+    working_dir: $GAMEDIR/drive_c/ProgramData/FreeInfantry/
 
   files:
-  - infantryinstaller: http://freeinfantry.com/download/win/latest/Install-Infantry-Online.exe
+  - infantryinstaller: http://freeinfantry.com/download/win/latest/Install-FreeInfantry.exe
   - infantrybanner: http://freeinfantry.com/download/installer-images/linux-lutris-banner-184x69.jpg
 
   installer:
@@ -29,19 +29,19 @@ script:
       name: winetricks
       prefix: $GAMEDIR
   - task:
-      description: "Step (2/2) - Installing Infantry Online..."
+      description: "Step (2/2) - Installing FreeInfantry..."
       executable: infantryinstaller
       args: "/ddraw=opengl /S"
       name: wineexec
       prefix: $GAMEDIR
   - move:
       src: infantrybanner
-      dst: $GAMEDIR/infantry-online.jpg
+      dst: $GAMEDIR/freeinfantry.jpg
   - execute:
       command: mkdir -p ~/.local/share/lutris/banners
       description: Create the banners folder if needed
   - execute:
-      command: cp $GAMEDIR/infantry-online.jpg ~/.local/share/lutris/banners/
+      command: cp $GAMEDIR/freeinfantry.jpg ~/.local/share/lutris/banners/
       description: Move the banner to the lutris banner folder
   wine:
       dxvk: "false"
