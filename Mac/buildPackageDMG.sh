@@ -15,7 +15,8 @@ if [ -d "${APP_LOCATION}" ]; then
 	#OVERRIDE PACKAGING VISIBLE VERSION?
 	#APP_VERSION="1.56a"
 	
-	APP_NAMEVERSION_NOSPACES="${APP_NAME//[[:blank:]]/}_${APP_VERSION//[[:blank:]]/}"
+	APP_NAME_NOSPACES="${APP_NAME//[[:blank:]]/}"
+	APP_NAMEVERSION_NOSPACES="${APP_NAME_NOSPACES}_${APP_VERSION//[[:blank:]]/}"
 	
 	PKGPROJ_LOCATION="./_assets/${APP_NAME}.pkgproj"
 	PKG_LOCATION="./_builds/pkg/${APP_NAME} ${APP_VERSION}.pkg"
@@ -47,7 +48,7 @@ if [ -d "${APP_LOCATION}" ]; then
 		# UPDATE .pkg NAMES
 		/usr/bin/plutil -replace PROJECT.PROJECT_SETTINGS.NAME -string "${APP_NAME} ${APP_VERSION}" "${PKGPROJ_LOCATION}"
 		/usr/bin/plutil -replace PROJECT.PACKAGE_SETTINGS.VERSION -string "${APP_VERSION}" "${PKGPROJ_LOCATION}"
-		/usr/bin/plutil -replace PROJECT.PACKAGE_SETTINGS.IDENTIFIER -string "com.${USER}.${APP_NAMEVERSION_NOSPACES}" "${PKGPROJ_LOCATION}"
+		/usr/bin/plutil -replace PROJECT.PACKAGE_SETTINGS.IDENTIFIER -string "com.${USER}.${APP_NAME_NOSPACES}" "${PKGPROJ_LOCATION}"
 		
 		# Notice extra dot before APP_LOCATION to mean back a directory...
 		/usr/bin/plutil -replace PROJECT.PACKAGE_FILES.HIERARCHY.CHILDREN.0.CHILDREN.0.PATH -string ".${APP_LOCATION}" "${PKGPROJ_LOCATION}"
