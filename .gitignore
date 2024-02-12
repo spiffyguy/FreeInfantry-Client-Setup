@@ -9,6 +9,8 @@
 /Windows/_builds/installer/**
 /Windows/_builds/launcher/**
 /Windows/_builds/cnc-ddraw/**
+/Windows/_builds/game-editors/**
+/Windows/_builds/game-initial-assets/**
 
 # Linux Ignore Files
 *.snap
