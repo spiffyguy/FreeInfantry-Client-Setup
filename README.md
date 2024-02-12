@@ -1,8 +1,8 @@
-# Infantry Online Client Setup/Installer Files
+# FreeInfantry Client Setup/Installer Files
 
-**Download the latest built, ready to play, Infantry Online client at: [http://freeinfantry.com](http://freeinfantry.com)**
+**Download the latest built, ready to play, FreeInfantry client at: [http://freeinfantry.com](http://freeinfantry.com)**
 
-Navigate the sections below for instructions on how to compile or run the Installer source files for Infantry Online on each platform.
+Navigate the sections below for instructions on how to compile or run the Installer source files for FreeInfantry on each platform.
 
 ## Windows Installer
 **Windows XP or later (Yes, including Windows 11)**
@@ -32,7 +32,7 @@ Navigate the sections below for instructions on how to compile or run the Instal
 >
 > 6. Choose "File" -> "Load Script..."
 > 
-> 7. Navigate to the `./Windows/nsis-Infantry-Online.nsi` script and choose "Open"
+> 7. Navigate to the `./Windows/nsis-FreeInfantry-Lite.nsi` script and choose "Open"
 >
 > 8. It will automatically compile and (if no errors) will build the distributable installer .exe here: `./Windows/_builds/installer/`
 >
@@ -87,7 +87,7 @@ Navigate the sections below for instructions on how to compile or run the Instal
 >
 > 1. Clone/Download this Github Repo
 >
-> 2. Place the built Wineskin wrapped Infantry Online.app here: "./Mac/_builds/app/Infantry Online.app"
+> 2. Place the built Wineskin wrapped FreeInfantry.app here: "./Mac/_builds/app/FreeInfantry.app"
 >
 > 3. Run the `./Mac/buildPackageDMG.sh` script in the terminal and it will build a .pkg installer file here: `./Mac/_builds/pkg/` and a distributable dmg file here: `./Mac/_builds/dmg/`
 >
@@ -121,7 +121,7 @@ Navigate the sections below for instructions on how to compile or run the Instal
 > 
 > **Step By Step**
 >
-> 1. Download the "./Linux/play-on-linux-infantry-online.sh" Script from this repo (Make sure to grab the RAW file if downloading through the browser)
+> 1. Download the "./Linux/play-on-linux-freeinfantry.sh" Script from this repo (Make sure to grab the RAW file if downloading through the browser)
 >
 > 2. Open PlayOnLinux
 >
@@ -129,13 +129,13 @@ Navigate the sections below for instructions on how to compile or run the Instal
 >![PlayOnLinux Tools Run Local Script](Linux/_screenshots/POL_Tools-Menu_Run-Local-Script.png)
 >
 > 4. Follow the PlayOnLinux "Run Local Script" prompts.
->    - Browse to the downloaded "play-on-linux-infantry-online.sh" script when it asks.
+>    - Browse to the downloaded "play-on-linux-freeinfantry.sh" script when it asks.
 >    - Click "Next."
 >    - Look the script code over make sure it's the one that came from this repo.
 >    - Check "I Agree" to run this local script
 >    - Click "Next" again to get into the PlayOnLinux installer.
 >
-> 5. Follow the installer prompts.  Infantry Online installs to your PlayOnLinux game library and will be ready to play!
+> 5. Follow the installer prompts.  FreeInfantry installs to your PlayOnLinux game library and will be ready to play!
 > 
 >  ![PlayOnLinux Game Library](Linux/_screenshots/POL-Game-Library.png)
 >
@@ -152,17 +152,17 @@ Navigate the sections below for instructions on how to compile or run the Instal
 > 
 > **Step By Step**
 >
-> 1. Download the "./Linux/lutris-infantry-online.yaml" Script from this repo (Make sure to grab the RAW file if downloading through the browser)
+> 1. Download the "./Linux/lutris-freeinfantry.yaml" Script from this repo (Make sure to grab the RAW file if downloading through the browser)
 >
 > 2. Open the Terminal
 >
-> 3. Enter the command `lutris -i lutris-infantry-online.yaml` and hit enter.  Lutris will open.
+> 3. Enter the command `lutris -i lutris-freeinfantry.yaml` and hit enter.  Lutris will open.
 >
 > 4. Click the "Install" button on the right.
 > 
->   ![Lutris Install Infantry Online Prompt](Linux/_screenshots/Lutris-Install-Infantry-Online-Prompt.png)
+>   ![Lutris Install FreeInfantry Prompt](Linux/_screenshots/Lutris-Install-FreeInfantry-Prompt.png)
 >
-> 5. Follow the installer prompts.  Infantry Online installs to your Lutris game library and will be ready to play!
+> 5. Follow the installer prompts.  FreeInfantry installs to your Lutris game library and will be ready to play!
 > 
 >  ![Lutris Game Library](Linux/_screenshots/Lutris-Game-Library.png)
 >
@@ -189,9 +189,9 @@ Navigate the sections below for instructions on how to compile or run the Instal
 >     - [https://wiki.winehq.org/Winetricks](https://wiki.winehq.org/Winetricks)
 >     - ie: `sh winetricks dotnet40`
 > 
-> 3. Download the official Infantry Online installer EXE and run it inside WINE
->     - [http://www.freeinfantry.com/download/win/latest/Install-Infantry-Online.exe](http://www.freeinfantry.com/download/win/latest/Install-Infantry-Online.exe)
->     - $ `wine path/to/downloads/Install-Infantry-Online.exe`
+> 3. Download the official FreeInfantry installer EXE and run it inside WINE
+>     - [http://www.freeinfantry.com/download/win/latest/Install-FreeInfantry.exe](http://www.freeinfantry.com/download/win/latest/Install-FreeInfantry.exe)
+>     - $ `wine path/to/downloads/Install-FreeInfantry.exe`
 > 
 > 4. Follow the installer prompts, defaults are good until you get to the "components" screen.  Be sure to choose the "cnc-ddraw, opengl" checkbox instead of the default "cnc-ddraw, dx9" checkbox.  (Both work for linux but you will get higher FPS with the opengl renderer.)
 > 
